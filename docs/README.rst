@@ -32,7 +32,7 @@ After :ref:`install_label`, you can start detecting CRs in your FITS files right
 
   $ cosmic-conn -m ground_imaging -e SCI -i input_dir
 
-This command launches a generic ``gorund_imaging`` model to detect cosmic rays. It reads data from the SCI extention in a FITS file and process all files in the input_dir. We also provide the ``NRES`` model for CR detection in spectroscopic data and the ``HST_ACS_WFC`` model for space-absed imaging data, more information available at `deepCR <https://github.com/profjsb/deepCR>`_. See :ref:`user-guide-label` for complete usage.
+This command launches a generic ``gorund_imaging`` model to detect cosmic rays. It reads data from the SCI extention in a FITS file and process all files in the input_dir. We also provide the ``NRES`` model for CR detection in spectroscopic data and the ``HST_ACS_WFC`` model for Hubble ACS/WFC imaging data. You could also find more Hubble Space Telescope CR detection and inpainting models trained by `deepCR <https://github.com/profjsb/deepCR>`_.
 
 Python APIs
 ===========

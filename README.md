@@ -1,7 +1,7 @@
 # Cosmic-CoNN
 ## A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
 
-[Github](https://github.com/cy-xu/cosmic-conn) • [Quick Start](https://github.com/cy-xu/cosmic-conn#command-line-interface) • [Publication](#https://github.com/cy-xu/cosmic-conn#publication) • [Documentation](https://cosmic-conn.readthedocs.io/) • [LCO CR Dataset](https://zenodo.org/record/5034763)
+[Github](https://github.com/cy-xu/cosmic-conn) • [Quick Start](https://github.com/cy-xu/cosmic-conn#Installation) • [Publication](https://github.com/cy-xu/cosmic-conn#publication) • [Documentation](https://cosmic-conn.readthedocs.io/) • [LCO CR Dataset](https://zenodo.org/record/5034763)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034763.svg)](https://doi.org/10.5281/zenodo.5034763)
 [![pypi](https://img.shields.io/pypi/v/cosmic-conn.svg)]() [![readthedocs](https://readthedocs.org/projects/cosmic-conn/badge/?version=latest)](https://cosmic-conn.readthedocs.io) [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
@@ -28,19 +28,17 @@ The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO N
 
 This repository is supplement to our Cosmic-CoNN research paper, a thorough evaluation of the models' performance can be found in our [paper link pending](https://arxiv.org/). If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
 
-```
-bibtex penidng
-```
+> Papaer's bibtex penidng
+
 
 Please also cite the LCO CR datset if you used the Cosmic-CoNN `ground_imaging` model or the data in your research:
 
-```
-Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
-```
+
+> Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
 
 ## Installation
 
-We recommend install Cosmic-CoNN in a new virutal enviroment, see step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
+We recommend installing Cosmic-CoNN in a new virutal enviroment, see step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
 
 ```console
   $ pip install cosmic-conn
@@ -54,7 +52,7 @@ After installation, you can start detecting CRs in your FITS files right from th
   $ cosmic-conn -m ground_imaging -e SCI -i input_dir
 ```
 
-This command launches a generic `gorund_imaging` model to detect cosmic rays. It reads data from the SCI extention in a FITS file and process all files in the input_dir. We also provide the `NRES` model for CR detection in spectroscopic data and the `HST_ACS_WFC` model for space-based imaging data. More models for space-based data available at [deepCR](https://github.com/profjsb/deepCR). 
+This command launches a generic `gorund_imaging` model to detect cosmic rays. It reads data from the SCI extention in a FITS file and process all files in the input_dir. We also provide the `NRES` model for CR detection in spectroscopic data and the `HST_ACS_WFC` model for Hubble ACS/WFC imaging data. You could also find more Hubble Space Telescope CR detection and inpainting models trained by [deepCR](https://github.com/profjsb/deepCR).
 
 ## Python APIs
 
@@ -85,7 +83,7 @@ The Cosmic-CoNN web app interface.
 
 ## Train new model with Cosmic-CoNN
 
-See [documentation](https://cosmic-conn.readthedocs.io/) for complete userand developler guides.
+See [documentation](https://cosmic-conn.readthedocs.io/) for complete user and developler guides.
 
 ## Credits
 

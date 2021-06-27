@@ -36,7 +36,7 @@ The reduction configuration and log are saved in ``CR_reduction_log.txt``.
 Train a new model with the Cosmic-CoNN framework
 ==================================================
 
-``cosmic_conn/dl_framework`` holds the source code for the Cosmic-CoNN deep-learning framework. ``trian.py`` is the entry file to initiate a new training. We recommend start a training by modifying an example script, e.g. the script that trains a LCO imaging model can be found at ``scripts/train_lco_imaging.sh``:
+``cosmic_conn/dl_framework`` holds the source code for the Cosmic-CoNN deep-learning framework. ``trian.py`` is the entry file to initiate a new training. We recommend start a training by modifying an example script, e.g. the script that trains a LCO imaging model can be found at ``scripts/train_lco.sh``:
 
 .. code-block:: text
 
