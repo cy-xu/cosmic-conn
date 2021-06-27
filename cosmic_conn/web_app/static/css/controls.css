@@ -1,0 +1,62 @@
+.control-group {
+    height: fit-content;
+    overflow: hidden;
+}
+
+.control-normal-button {
+    padding: .25rem .5rem;
+    font-size: 0.65rem;
+    line-height: 1;
+    border-radius: .2rem;
+    border-color: #39458f ;
+    background-image: linear-gradient(to right, #4884e3 5%, #4884e3 100%);
+}
+
+.control-dropdown-button {
+    padding: .25rem .5rem;
+    font-size: 0.65rem;
+    line-height: 1;
+    border-radius: .2rem;
+    background-image: linear-gradient(to right, #455bd5 5%, #4884e3 100%);
+}
+
+.control-dropdown-item {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.control-badge {
+    border-style: none;
+    border-radius: 0.25rem;
+    padding: 2px 10px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: white;
+    background-image: linear-gradient(to right, #009ea0 5%, #41c4ba 100%);
+    min-width: 3.25rem;
+}
+
+.control-label {
+    border-style: none;
+    padding: 2px 10px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: white;
+    background-image: linear-gradient(to right, #455bd5 5%, #4884e3 100%);
+    min-width: 2.5rem;
+    width: fit-content;
+    max-width: 5.0rem;
+}
+
+.control-input {
+    border-style: solid;
+    border-width: 1px;
+    border-color:#4884e3;
+    font-size: 0.65rem;
+    width: 2.75rem;
+}
+
+.control-shadow {
+    box-shadow: 1px 2px 7px -1px rgba(0, 0, 0, 0.25);
+}
+

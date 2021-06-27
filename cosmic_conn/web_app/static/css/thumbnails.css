@@ -1,0 +1,14 @@
+.thumbnail {
+    border-radius: 4px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex;
+    width: 100%; 
+    height: auto;
+}
+
+.thumbnail:hover {
+    border: solid;
+    border-width: 3px;
+    border-color: rgb(128, 162, 255);
+}

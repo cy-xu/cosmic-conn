@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>result page</title>
+  </head>
+<body>
+
+	<p>
+    Detection finished.
+    <a href=" {{url_for('get_file', file=fits)}} "> Download fits with mask.</a> <br>
+    Usage: open fits in ds9 as "Multiple Extension Frames", lock frame WCS and you could check CR with 'SCI' frame side by side.
+</p>
+
+<p> Downdload png file -
+    <a href=" {{url_for('get_file', file=frame)}} " target="_blank"> Frame </a>
+    /
+    <a href=" {{url_for('get_file', file=mask)}} " target="_blank"> Mask </a>
+</p>
+
+<p>
+    <a href="http://128.111.185.94:5000/" target="_blank">Upload another</a>
+</p>
+
+
+<style>
+
+section {
+  position: relative;
+}
+
+section img {
+  position: absolute;
+}
+
+.top {
+	animation-name: fade;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-duration: 1s;
+	animation-direction: alternate;
+}
+
+@keyframes fade {
+	0% {
+		opacity: 1;
+	}
+	25% {
+		opacity: 1;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+</style>
+
+<section>
+	<img class="bottom" src="{{url_for('get_file', file=mask)}}">
+	<img class="top" src="{{url_for('get_file', file=frame)}}">
+</section>
+
+
+</body>
+</html>

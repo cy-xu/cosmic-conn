@@ -1,0 +1,33 @@
+<!-- Scale Select Area -->
+<div class="dropdown btn-group show control-shadow mr-2 rounded">
+    <a id="scale-select-dropdown-button" class="btn btn-primary btn-sm control-dropdown-button dropdown-toggle "
+        href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Scale
+    </a>
+
+    <div id="scale-select-menu" class="dropdown-menu" aria-labelledby="scale-select-dropdown-button">
+        <a class="dropdown-item control-dropdown-item" href="#">zscale</a>
+        <a class="dropdown-item control-dropdown-item" href="#">Linear</a>
+        <a class="dropdown-item control-dropdown-item" href="#">Log</a>
+        <a class="dropdown-item control-dropdown-item" href="#">Sqrt</a>
+    </div>
+</div>
+
+<div class="control-group btn-group control-shadow mr-2 rounded">
+    <span id="curr-scale-method-label" class="text-center control-badge ">zscale</span>
+</div>
+
+<div class="control-group btn-group mr-2 control-shadow rounded">
+    <span class=" control-label rounded-left">Min</span>
+    <input id='scale-min-input' class="text-center control-input">
+    <span class=" control-label">Max</span>
+    <input id='scale-max-input' class="text-center control-input rounded-right">
+    <!-- <button id="z-scale-button" class="btn btn-outline-primary btn-sm">Z-Scale</button> -->
+</div>
+
+<div id='black-white-map-control' class="control-group btn-group mr-2 control-shadow rounded">
+    <span class=" control-label rounded-left">Black</span>
+    <input id='black-value-input' class="text-center control-input">
+    <span class=" control-label">White</span>
+    <input id='white-value-input' class="text-center control-input rounded-right">
+</div>

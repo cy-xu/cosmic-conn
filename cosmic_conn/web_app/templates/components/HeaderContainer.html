@@ -1,0 +1,52 @@
+<!-- Header Part -->
+<div class="row col-12 px-0 align-items-center">
+  <div class="col-md-9" style="width: auto; ">
+    <div class="mx-2">
+      <h1 class="">Cosmic-CoNN Web App</h1>
+      <p class="my-3" style="line-height:1.7rem; font-size: 1.1rem;">
+        <span class="font-weight-bold">Usage: </span>Start the app with -e EXT to define data's extension, otherwise we
+        read the [0, 1,
+        or SCI].data in the selected FITS. // By default a 0.5 threshold is applied to acquire the binary CR mask. Lower
+        the threshold to include more peripheral CR pixels and apply morphological dilation to enlarge detected CRs. //
+        Predicted CR
+        probability map is appended to a new FITS copy, use the Download button to append the edited binary mask.
+      </p>
+
+      <!-- Fits Upload Input Box -->
+      <div class="input-group my-3">
+        <div class="custom-file">
+          <input id="file-input" type="file" class="custom-file-input" accept="application/fits">
+          <label id="file-name-label" class="custom-file-label" for="fits-file-input">Select a FITS file (local
+            instance, your data is not uploaded)</label>
+        </div>
+        <div class="input-group-append">
+          <button id="file-upload-btn" class="btn btn-outline-primary" type="button">Detect CR</button>
+        </div>
+        <div class="input-group-append">
+          <button id="file-download-btn" class="btn btn-outline-primary" type="button" disabled>Download</button>
+        </div>
+      </div>
+
+      <!-- Status / Alert Indicator -->
+      <div class="my-2"></div>
+      <div id="status-indicator" class="alert alert-info" role="alert" style="display: none;">
+        This is a secondary alert—check it out!
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Image -->
+  <div class="col d-flex justify-content-center py-3 px-4" style="position: relative;">
+    <div class="my-3 my-md-0 d-md-flex"></div>
+    <div class="my-auto" style="position: relative; height: 100%;">
+      <!-- Full Size Image -->
+      <div id="zoom-window"
+        style="pointer-events: none; position: absolute; background-color: transparent; image-rendering: auto; image-rendering: crisp-edges; image-rendering: pixelated;">
+      </div>
+      <!-- <img id="main-img" class="overview-image" src="http://placehold.jp/150x150.png" alt="Original"
+        style="width: 100%;"> -->
+      <img id="main-img" class="overview-image" src="https://via.placeholder.com/300x300?text=image+overview"
+        alt=" image overview" style="width: 100%;">
+    </div>
+  </div>
+</div>

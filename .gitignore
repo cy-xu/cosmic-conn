@@ -1,3 +1,31 @@
+# cosmic-conn related ignore
+# avoid data
+*.fits
+*.fz
+*.zip
+*.pth
+*.lprof
+*.out
+*.pdf
+*.out
+.DS_Store
+*.csv
+
+# ignored dirs
+trained_models
+cosmic_conn/data
+cosmic_conn/trained_models
+demo_data
+slurm
+checkpoints*
+paper_PDFs
+instance_temp_storage
+cosmic_conn_output
+
+# IDEs
+.idea
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -13,7 +41,7 @@ develop-eggs/
 dist/
 downloads/
 eggs/
-.eggs/
+.eggs
 lib/
 lib64/
 parts/
@@ -49,7 +77,7 @@ coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-.pytest_cache/
+.pytest_cache
 
 # Translations
 *.mo
