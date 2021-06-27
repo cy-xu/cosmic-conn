@@ -55,7 +55,7 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
 Web app
 =======
 
-The Cosmic-CoNN web app automatically list larges CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable threshold for different types of observations:
+The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable threshold for different types of observations:
 
 .. figure:: /_static/cosmic_conn_web_app_interface.png
   :alt: an image shows the web-based CR detector interface
@@ -65,17 +65,13 @@ The Cosmic-CoNN web app automatically list larges CRs for close inspection. It s
 Publication
 ===========
 
-A thorough evaluation of the models' performance can be found in our `paper link pending <https://arxiv.org/>`_.
-
-.. note:: 
-
-    If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+A thorough evaluation of the models' performance can be found in our `paper link pending <https://arxiv.org/>`_. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
     
-    bibtex penidng
+bibtex penidng
 
-    Please also cite the LCO CR datset if you used the Cosmic-CoNN ``ground_imaging`` model or the data in your research:
+Please also cite the LCO CR datset if you used the Cosmic-CoNN ``ground_imaging`` model or the data in your research:
 
-    Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
+``Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763``
 
 
 Mics.
@@ -91,6 +87,8 @@ Mics.
 .. image:: http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat
         :: target: http://www.astropy.org/
         :alt: astropy
+
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
 
 * Free software: GNU General Public License v3
 * Documentation: https://cosmic-conn.readthedocs.io.

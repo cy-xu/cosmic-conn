@@ -55,7 +55,7 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
 Web app
 =======
 
-The Cosmic-CoNN web app automatically list larges CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable threshold for different types of observations:
+The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable threshold for different types of observations:
 
 .. figure:: /docs/_static/cosmic_conn_web_app_interface.png
   :alt: an image shows the web-based CR detector interface
