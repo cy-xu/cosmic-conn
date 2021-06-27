@@ -5,7 +5,7 @@
 import os
 from setuptools import setup, find_packages
 
-with open("docs/README.rst") as readme_file:
+with open("README.md") as readme_file:
     readme = readme_file.read()
 
 # with open("HISTORY.rst") as history_file:
@@ -72,6 +72,7 @@ setup(
         '-f https://download.pytorch.org/whl/torch_stable.html'],
     license="GNU General Public License v3",
     long_description=readme,
+    long_description_content_type='text/markdown',
     include_package_data=True,
     keywords="cosmic_conn",
     name="cosmic_conn",
@@ -86,7 +87,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
-    url="https://github.com/cy-xu/cosmic_conn",
-    version="0.2.0",
+    url="https://github.com/cy-xu/cosmic-conn",
+    version="0.2.1",
     zip_safe=False,
 )

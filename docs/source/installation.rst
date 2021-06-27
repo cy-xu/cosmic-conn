@@ -23,11 +23,6 @@ Activate this environment::
     if failed, try
     $ source activate cosmic-conn
 
-Install pip to manage packages::
-
-    $ conda install pip -y
-
-
 Install for a CUDA-enabled GPU
 ==============================
 
@@ -72,7 +67,7 @@ Install for CPU
 
 Install with `pip`::
     
-    $ pip install https://sites.cs.ucsb.edu/~cy.xu/cosmic_conn/dist/cosmic_conn-0.1.9-py2.py3-none-any.whl
+    $ pip install cosmic-conn
 
 .. $ pip install -i https://test.pypi.org/simple/ cosmic-conn
 

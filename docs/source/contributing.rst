@@ -54,8 +54,8 @@ Ready to contribute? Here's how to set up `cosmic_conn` for local development.
 1. Fork the `cosmic_conn` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/cosmic_conn.git
-    $ cd cosmic_conn/
+    $ git clone git@github.com:your_name_here/cosmic-conn.git
+    $ cd cosmic-conn/
 
 3. Install your local copy into a virtual environment. Follow the installation guide and install with::
 

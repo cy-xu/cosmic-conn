@@ -9,11 +9,11 @@ A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
 
 Cosmic-CoNN is an end-to-end solution to help tackle the cosmic ray (CR) detection problem in CCD-captured astronomical images. It includes a deep-learning framework, high-performance CR detection models, a new dataset, and a suite of tools to use to the models, shown in the figure above:
 
-1. A large, diverse CR dataset (over 4,500 scientific observations!) using data from `Las Cumbres Observatory <https://lco.global/>`_ (LCO) global telescope network's 23 instruments.
+1. `LCO CR dataset <https://zenodo.org/record/5034763>`_, a large, diverse cosmic ray dataset  consists of over 4,500 scientific images from `Las Cumbres Observatory <https://lco.global/>`_ (LCO) global telescope network's 23 instruments. CRs are labeled accurately and consistently across many diverse observations from various instruments. To the best of our knowledge, this is the largest dataset of its kind. 
 
 2. A `PyTorch <https://pytorch.org/>`_ deep-learning framework that trains generic, robust CR detection models for ground- and space-based imaging data, as well as spectroscopic observations.
 
-3. A suite of tools includings console commands, a web app, and Python APIs that make deep-learning models widely accessible to astronomers.
+3. A suite of tools includings console commands, a web app, and Python APIs to make deep-learning models easily accessible to astronomers.
 
 .. figure:: /_static/fig11_gemini_results_demo.png
         :alt: Detection demo on Gemini data
@@ -65,13 +65,13 @@ The Cosmic-CoNN web app automatically finds large CRs for close inspection. It s
 Publication
 ===========
 
-A thorough evaluation of the models' performance can be found in our `paper link pending <https://arxiv.org/>`_. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
-    
+This repository is supplement to our Cosmic-CoNN research paper, a thorough evaluation of the models' performance can be found in our `paper link pending <https://arxiv.org/>`_. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+
 bibtex penidng
 
 Please also cite the LCO CR datset if you used the Cosmic-CoNN ``ground_imaging`` model or the data in your research:
 
-``Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763``
+Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
 
 
 Mics.
@@ -87,8 +87,6 @@ Mics.
 .. image:: http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat
         :: target: http://www.astropy.org/
         :alt: astropy
-
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
 
 * Free software: GNU General Public License v3
 * Documentation: https://cosmic-conn.readthedocs.io.
