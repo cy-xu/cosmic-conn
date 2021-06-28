@@ -1,10 +1,9 @@
 # Cosmic-CoNN
 ## A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
 
-[Github](https://github.com/cy-xu/cosmic-conn) • [Quick Start](https://github.com/cy-xu/cosmic-conn#Installation) • [Publication](https://github.com/cy-xu/cosmic-conn#publication) • [Documentation](https://cosmic-conn.readthedocs.io/) • [LCO CR Dataset](https://zenodo.org/record/5034763)
+[Github](https://github.com/cy-xu/cosmic-conn) • [Quick Start](https://github.com/cy-xu/cosmic-conn#Installation) • [Publication](https://github.com/cy-xu/cosmic-conn#publication) • [Pypi release](https://pypi.org/project/cosmic-conn/) [Documentation](https://cosmic-conn.readthedocs.io/) • [LCO CR Dataset](https://zenodo.org/record/5034763)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034763.svg)](https://doi.org/10.5281/zenodo.5034763)
-[![pypi](https://img.shields.io/pypi/v/cosmic-conn.svg)]() [![readthedocs](https://readthedocs.org/projects/cosmic-conn/badge/?version=latest)](https://cosmic-conn.readthedocs.io) [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034763.svg)](https://doi.org/10.5281/zenodo.5034763) [![PyPI version](https://badge.fury.io/py/cosmic-conn.svg)](https://badge.fury.io/py/cosmic-conn) [![readthedocs](https://readthedocs.org/projects/cosmic-conn/badge/?version=latest)](https://cosmic-conn.readthedocs.io) [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
 
 ## About 
 ![Cosmic-CoNN overview](https://cosmic-conn.readthedocs.io/en/latest/_images/Cosmic-CoNN_overview.png)
