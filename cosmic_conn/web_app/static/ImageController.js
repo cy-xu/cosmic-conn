@@ -52,9 +52,9 @@ class ImageController {
     refresh_frame_view(start_stage) {
         switch (start_stage) {
             case FramePipeStage.RAW_STAGE:
-                console.log("[RAW STAGE] Processing...")
                 let [v_min, v_max] = this.raw_image_model.pixel_range
                 this.image_control_panel.set_scale_clamp_range(v_min, v_max)
+                console.log("[RAW STAGE] Processing... " + " value range: " + v_min + ", " + v_max)
             case FramePipeStage.CLAMP_STAGE:
                 console.log("[CLAMP STAGE] Processing...")
                 let [clp_min, clp_max] = this.image_control_panel.get_scale_clamp_range()
@@ -82,7 +82,8 @@ class ImageController {
                 let curved_frame = this.curved_frame_model.curved_frame
                 let final_frame = lerp_color_uint8(curved_frame, black_percent, white_percent)
                 console.log("B/W Range: " + black_percent + ", " + white_percent + " ")
-                console.log("curved frame: " + curved_frame) 
+                console.log("curved frame: ")
+                console.log(curved_frame) 
                 // TODO: NEed to refactor the canvas code
                 // update to canvas
                 let [width, height] = this.raw_image_model.image_dimension

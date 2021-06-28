@@ -1,10 +1,19 @@
 class ImageDataWrapper {
     constructor(grayscale_array, width, height) {
+        grayscale_array = this.remove_nan(grayscale_array)
         this.image_array = nj.float32(grayscale_array)
         this.width = width
         this.height = height
         this.pixel_min = nj.min(this.image_array)
         this.pixel_max = nj.max(this.image_array)
+    }
+
+    remove_nan(grayscale_array) {
+        for (let i = 0; i < grayscale_array.length; i++) {
+            if (isNaN(grayscale_array[i]))
+                grayscale_array[i] = 0.0
+        }
+        return grayscale_array
     }
 }
 
@@ -53,11 +62,11 @@ class RawImageModel {
     }
 
     get raw_frame() {
-        return this.frame_image.image_array
+        return this.frame_image.image_array.clone()
     }
 
     get raw_mask() {
-        return this.mask_image.image_array
+        return this.mask_image.image_array.clone()
     }
 }
 
@@ -77,7 +86,7 @@ class ClampedFrameModel {
     }
 
     get clamped_frame() {
-        return this.clamped_frame_array
+        return this.clamped_frame_array.clone()
     }
 }
 
@@ -98,7 +107,7 @@ class ThreeSigmaFrameModel {
     }
 
     get sigma_frame() {
-        return this.sigma_frame_array
+        return this.sigma_frame_array.clone()
     }
 
     get value_range() {
@@ -127,7 +136,7 @@ class CurvedFrameModel {
     }
 
     get curved_frame() {
-        return this.curved_frame_array
+        return this.curved_frame_array.clone()
     }
 
     get pixel_range() {
