@@ -2,4 +2,4 @@
 
 __author__ = """Chengyuan Xu, Curtis McCully, Boning Dong, D. Andrew Howell, and Pradeep Sen"""
 __email__ = "cxu@ucsb.edu"
-__version__ = "0.2.1"
+__version__ = "0.2.2"
