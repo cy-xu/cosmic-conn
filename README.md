@@ -15,7 +15,7 @@ Cosmic-CoNN is an end-to-end solution to help tackle the cosmic ray (CR) detecti
 
 2. A PyTorch deep-learning framework that trains generic, robust CR detection models for ground- and space-based imaging data, as well as spectroscopic observations.
 
-3. A suite of tools includings console commands, a web app, and Python APIs to make deep-learning models easily accessible to astronomers.
+3. A suite of tools includinging console commands, a web app, and Python APIs to make deep-learning models easily accessible to astronomers.
 
 ![Detection demo on Gemini data](https://cosmic-conn.readthedocs.io/en/latest/_images/fig11_gemini_results_demo.png)
 Visual inspection of Cosmic-CoNNCR detection results. Detecting CRs in a Gemini GMOS-N 1×1 binning image with our generic ``ground-imaging`` model. The model was trained entirely on LCO data yet all visible CRs in the image stamp are correctly detected regardless of their shapes or sizes.
@@ -26,7 +26,7 @@ The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO N
 
 ## Publication
 
-This repository is supplement to our Cosmic-CoNN research paper, a thorough evaluation of the models' performance can be found in our [paper link pending](https://arxiv.org/). If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+This repository is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance can be found in our [paper link pending](https://arxiv.org/). If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
 
 > Papaer's bibtex penidng
 
@@ -38,7 +38,7 @@ Please also cite the LCO CR datset if you used the Cosmic-CoNN `ground_imaging` 
 
 ## Installation
 
-We recommend installing Cosmic-CoNN in a new virutal enviroment, see step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
+We recommend installing Cosmic-CoNN in a new virutal enviroment, see the step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html). To get a ~10x speed-up with GPU acceleration, see [Install for a CUDA-enabled GPU](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
 
 ```console
   $ pip install cosmic-conn
@@ -46,13 +46,15 @@ We recommend installing Cosmic-CoNN in a new virutal enviroment, see step-by-ste
 
 ## Command line interface
 
-After installation, you can start detecting CRs in your FITS files right from the command line:
+After installation, you can start CR detection in FITS files right from the terminal:
 
 ```console
   $ cosmic-conn -m ground_imaging -e SCI -i input_dir
 ```
 
 This command launches a generic `gorund_imaging` model to detect cosmic rays. It reads data from the SCI extention in a FITS file and process all files in the input_dir. We also provide the `NRES` model for CR detection in spectroscopic data and the `HST_ACS_WFC` model for Hubble ACS/WFC imaging data. You could also find more Hubble Space Telescope CR detection and inpainting models trained by [deepCR](https://github.com/profjsb/deepCR).
+
+See [documentation](https://cosmic-conn.readthedocs.io/en/latest/source/user_guide.html) for the complete user guide.
 
 ## Python APIs
 
@@ -75,15 +77,15 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
 
 ## Web app
 
-The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable threshold for different types of observations:
+The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable thresholds for different types of observations:
 
 <img src="https://cosmic-conn.readthedocs.io/en/latest/_images/cosmic_conn_web_app_interface.png" alt="web-based CR detector interface" width="600"/>
 
 The Cosmic-CoNN web app interface.
 
-## Train new model with Cosmic-CoNN
+## Train new models with Cosmic-CoNN
 
-See [documentation](https://cosmic-conn.readthedocs.io/) for complete user and developler guides.
+See [documentation](https://cosmic-conn.readthedocs.io/en/latest/source/lco_cr_dataset.html) for the developler guide on using LCO CR dataset, data reduction, and model training.
 
 ## Credits
 

@@ -22,10 +22,6 @@ The expanded LCO CR data set directory has the following structure:
     ├-train_set/
     │ |
     │ └-0m4_2019/
-    │ │ ├-aligned_fits/
-    │ │ │ ├-coj0m403-kb24-20190101-0147-e91_3frms_aligned.fits
-    │ │ │ ├-coj0m403-kb24-20190101-0150-e91_3frms_aligned.fits 
-    │ │ │ └─...
     │ │ ├-masked_fits/
     │ │ │ ├-coj0m403-kb24-20190101-0147-e91_3frms_masks.fits
     │ │ │ ├-coj0m403-kb24-20190101-0150-e91_3frms_masks.fits 
