@@ -37,12 +37,10 @@ function check_gpu_info() {
         xhr.upload.onprogress = (e) => {
             if (e.lengthComputable) {
                 var percent_completed = (e.loaded / e.total) * 100
-                console.log(percent_completed)
             }
         }
 
         xhr.onload = () => {
-            console.log('status: ' + xhr.status)
             if (xhr.status == 200) {
                 resolve(xhr.response)
             } else {
@@ -57,7 +55,6 @@ function check_gpu_info() {
         xhr.send()
     })
     promise.then(response => {
-        console.log("JSON RESPONSE: ", response)
         try {
             if (response.gpu_detected)
                 status_indicator.display_status_info("GPU found!")
@@ -75,7 +72,6 @@ function file_upload_response_callback(arraybuffer) {
     const status_string = 'Detection completed. Result saved in `cosmic_conn_output`. Zoom in on image for close inspection.'
     status_indicator.display_status_info(status_string)
     let response = new PostResponse(arraybuffer)
-    console.log("Received payload number: ", response.get_payload_counts())
 
     // read the frame and mask image
     let frame_payload = response.get_payload_at(0)
@@ -89,8 +85,6 @@ function file_upload_response_callback(arraybuffer) {
     let patch_size = thumbnail_payload.thumbnail_patch_size
     let thumbnail_number = thumbnail_payload.thumbnail_number
     let thumbnail_coords = thumbnail_payload.thumbnail_coords_array
-    console.log("thumbnail number: ", thumbnail_number, " patch size: ", patch_size)
-    console.log(thumbnail_coords, "\n")
 
     controller.set_raw_image_model(frame_payload, mask_payload, float_list_payload)
     controller.refresh_thumbnails(thumbnail_coords, patch_size)

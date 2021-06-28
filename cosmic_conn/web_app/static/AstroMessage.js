@@ -68,7 +68,6 @@ class PostResponse {
             case PayloadTypes.THUMBNAIL_TYPE:
                 return new ThumbnailPayload(payload_buffer)
             case PayloadTypes.FLOATLIST_TYPE:
-                console.log("ready to process float list payload")
                 return new FloatListPayload(payload_buffer)
             default:
                 console.log("received invalid payload type")
@@ -180,7 +179,6 @@ class FloatListPayload {
 
     get zscale_array() {
         // correct here
-        console.log(this.zscale_params)
         return this.zscale_params
     }
 }

@@ -27,8 +27,6 @@ class ThumbnailBar {
         const [width, height] = [mask_image_wrapper.width, mask_image_wrapper.height]
         let image_array = mask_image_wrapper.image_array
 
-        console.log("mask_array: ", image_array)
-
         let canvas = document.createElement('canvas')
         canvas.setAttribute('width', width)
         canvas.setAttribute('height', height)

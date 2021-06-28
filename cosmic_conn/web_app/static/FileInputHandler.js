@@ -46,13 +46,11 @@ class FileInputHanlder {
     wrap_file_into_formdata(formdata) {
         let selected_file = this.file_input.files[0]
         formdata.append(FILE_ID_IN_FORMDATA, selected_file)
-        console.log("File loaded")
         return formdata
     }
 
     wrap_uuid_into_formdata(formdata) {
         formdata.append("uuid", uuid)
-        console.log("UUID loaded: " + uuid)
         return formdata
     }
 
@@ -65,12 +63,10 @@ class FileInputHanlder {
             xhr.upload.onprogress = (e) => {
                 if (e.lengthComputable) {
                     var percent_completed = (e.loaded / e.total) * 100
-                    console.log(percent_completed)
                 }
             }
 
             xhr.onload = () => {
-                console.log('status: ' + xhr.status)
                 if (xhr.status == 200) {
                     resolve(xhr.response)
                 } else {

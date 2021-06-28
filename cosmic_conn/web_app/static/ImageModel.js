@@ -38,7 +38,6 @@ class RawImageModel {
 
     set_zscale(float_list_payload) {
         let zscale_params = float_list_payload.zscale_array
-        console.log(zscale_params)
         let zscale_z1 = zscale_params[0]
         let zscale_z2 = zscale_params[1]
         this.zscale_params = [zscale_z1, zscale_z2]

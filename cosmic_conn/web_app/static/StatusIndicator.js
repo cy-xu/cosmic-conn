@@ -7,7 +7,6 @@ class StatusIndicator {
         this.status_bar = document.getElementById(STATUS_INDICATOR_ID)
         this.status_bar_jquery = $('#' + STATUS_INDICATOR_ID)
         this.hide_status_bar()
-        console.log('status indicator is initialized.')
     }
 
     hide_status_bar() {
