@@ -13,7 +13,7 @@ const SQUARE_ROOT_SCALE_NAME = 'sqrt'
 
 
 function lerp_color_uint8(image_array, bottom_percent, top_percent) {
-    let num_array = nj.float32(image_array)
+    let num_array = nj.float32(image_array.clone())
     let [min_value, max_value] = [nj.min(num_array), nj.max(num_array)]
     let dark_val = (max_value - min_value) * bottom_percent + min_value
     let bright_val = (max_value - min_value) * top_percent + min_value

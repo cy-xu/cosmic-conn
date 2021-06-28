@@ -34,7 +34,7 @@ class ImageController {
 
     // stage 1:
     set_raw_image_model(frame_payload, mask_payload, float_list_payload) {
-        console.log("setting raw image model")
+        console.log("[ImageController] setting raw image model")
         this.raw_image_model.update_frame_image(frame_payload)
         this.raw_image_model.update_mask_image(mask_payload)
         this.raw_image_model.set_zscale(float_list_payload)
@@ -42,7 +42,7 @@ class ImageController {
 
     // stage 1.5:
     refresh_thumbnails(coord_list, patch) {
-        console.log("refreshing thumbnails")
+        console.log("[ImageController] refreshing thumbnails")
         this.mask_image_wrapper = this.raw_image_model.mask_image
         this.thumbnail_bar.clear_thumbnails();
         this.thumbnail_bar.append_thumbnails(this.mask_image_wrapper, coord_list, patch)
@@ -52,16 +52,20 @@ class ImageController {
     refresh_frame_view(start_stage) {
         switch (start_stage) {
             case FramePipeStage.RAW_STAGE:
+                console.log("[RAW STAGE] Processing...")
                 let [v_min, v_max] = this.raw_image_model.pixel_range
                 this.image_control_panel.set_scale_clamp_range(v_min, v_max)
             case FramePipeStage.CLAMP_STAGE:
+                console.log("[CLAMP STAGE] Processing...")
                 let [clp_min, clp_max] = this.image_control_panel.get_scale_clamp_range()
                 let raw_frame = this.raw_image_model.raw_frame;
                 this.clamped_frame_model.update_clamped_frame(raw_frame, [clp_min, clp_max])
             case FramePipeStage.SIGMA_STAGE:
+                console.log("[SIGMA STAGE] Processing...")
                 let clamped_frame = this.clamped_frame_model.clamped_frame
                 this.sigma_frame_model.update_sigma_frame(clamped_frame)
             case FramePipeStage.CURVE_STAGE:
+                console.log("[CURVE STAGE] Processing...")
                 let curve_method_name = this.image_control_panel.get_current_scale_method_name()
                 let curver = new ImageCurver(curve_method_name)
                 let sigma_frame = this.sigma_frame_model.sigma_frame
@@ -73,9 +77,12 @@ class ImageController {
                     this.curved_frame_model.update_curve_frame(sigma_frame, curver)
                 }
             case FramePipeStage.RENDER_STAGE:
+                console.log("[RENDER STAGE] Processing...")
                 let [black_percent, white_percent] = this.image_control_panel.get_black_white_points_percent()
                 let curved_frame = this.curved_frame_model.curved_frame
                 let final_frame = lerp_color_uint8(curved_frame, black_percent, white_percent)
+                console.log("B/W Range: " + black_percent + ", " + white_percent + " ")
+                console.log("curved frame: " + curved_frame) 
                 // TODO: NEed to refactor the canvas code
                 // update to canvas
                 let [width, height] = this.raw_image_model.image_dimension
