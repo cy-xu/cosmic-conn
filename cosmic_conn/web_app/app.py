@@ -127,6 +127,9 @@ def process():
             else:
                 image = hdul[opt.ext].data.astype("float32")
 
+            # remove Nan is exist
+            image = np.nan_to_num(image, copy=False, nan=0.0)
+
         except:
             raise ValueError(
                 f"No valid data found in extention 0, 1 or {opt.ext}, \
@@ -248,7 +251,7 @@ def main(cr_model, opt):
     app.config['opt'] = opt
     app.config['cr_model'] = cr_model
 
-    app.run(host="127.0.0.1", debug=True)
+    app.run(host="127.0.0.1", debug=False)
 
 
 if __name__ == "__main__":

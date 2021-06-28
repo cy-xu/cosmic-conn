@@ -22,6 +22,7 @@ from cosmic_conn.dl_framework.utils_ml import (
     median_weighted_bce,
     tensor2np,
     DiceLoss,
+    remove_nan
 )
 from cosmic_conn.dl_framework.unet import UNet_module
 
@@ -226,6 +227,9 @@ class Cosmic_CoNN(nn.Module):
         return mask
 
     def detect_cr(self, image, ret_numpy=True):
+        # replace NaN with 0.0 if exist
+        image = remove_nan(image)
+
         # numpy array -> tensor
         if not isinstance(image, torch.Tensor):
             image = torch.tensor(image).float()

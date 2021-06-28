@@ -24,6 +24,13 @@ def tensor2np(gpu_tensor):
         return gpu_tensor
 
 
+def remove_nan(image):
+    # replace NaN with 0.0 if exist
+    if np.sum(np.isnan(image)) > 0:
+        image = np.nan_to_num(image, copy=False, nan=0.0)
+    return image
+
+
 def memory_check(device):
     # check if the machien/GPU has sufficient memory for
     # full image detection without movign to swap

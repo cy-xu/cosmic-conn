@@ -43,7 +43,6 @@ def zscale(image, nsamples=1000, contrast=0.25, bpmask=None, zmask=None):
     """
 
     # Sample the image
-    image = numpy.nan_to_num(image, copy=True, nan=0.0, posinf=None, neginf=None)
     samples = zsc_sample(image, nsamples, bpmask, zmask)
     npix = len(samples)
     samples.sort()

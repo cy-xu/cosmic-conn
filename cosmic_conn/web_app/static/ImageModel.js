@@ -1,19 +1,10 @@
 class ImageDataWrapper {
     constructor(grayscale_array, width, height) {
-        grayscale_array = this.remove_nan(grayscale_array)
         this.image_array = nj.float32(grayscale_array)
         this.width = width
         this.height = height
         this.pixel_min = nj.min(this.image_array)
         this.pixel_max = nj.max(this.image_array)
-    }
-
-    remove_nan(grayscale_array) {
-        for (let i = 0; i < grayscale_array.length; i++) {
-            if (isNaN(grayscale_array[i]))
-                grayscale_array[i] = 0.0
-        }
-        return grayscale_array
     }
 }
 
