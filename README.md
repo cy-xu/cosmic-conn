@@ -1,7 +1,7 @@
 # Cosmic-CoNN
 ## A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
 
-[Github](https://github.com/cy-xu/cosmic-conn) • [Quick Start](https://github.com/cy-xu/cosmic-conn#Installation) • [Publication](https://github.com/cy-xu/cosmic-conn#publication) • [Pypi Release](https://pypi.org/project/cosmic-conn/) • [Documentation](https://cosmic-conn.readthedocs.io/) • [LCO CR Dataset](https://zenodo.org/record/5034763)
+[Github](https://github.com/cy-xu/cosmic-conn) • [Quick Start](https://github.com/cy-xu/cosmic-conn#Installation) • [Publication](https://github.com/cy-xu/cosmic-conn#publication) • [PyPI Release](https://pypi.org/project/cosmic-conn/) • [Documentation](https://cosmic-conn.readthedocs.io/) • [LCO CR Dataset](https://zenodo.org/record/5034763)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034763.svg)](https://doi.org/10.5281/zenodo.5034763) [![PyPI version](https://badge.fury.io/py/cosmic-conn.svg)](https://badge.fury.io/py/cosmic-conn) [![readthedocs](https://readthedocs.org/projects/cosmic-conn/badge/?version=latest)](https://cosmic-conn.readthedocs.io) [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
 
@@ -22,19 +22,22 @@ Visual inspection of Cosmic-CoNNCR detection results. Detecting CRs in a Gemini 
 ![Detection demo on LCO NRES data](https://cosmic-conn.readthedocs.io/en/latest/_images/fig11_nres_result_0034_1.png)
 The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO NRES spectroscopic image. The horizontal bands in the left image are the spectroscopicorders, which are left out of the CR mask.
 
-
 ## Publication
 
-This repository is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance can be found in our [paper link pending](https://arxiv.org/). If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+<p>
+<a href="https://www.w3schools.com"><img style="float: left; padding-right:30px;" src="docs/_static/paper_with_shadow.png"  width="220"/></a>
 
-> Papaer's bibtex penidng
+This repository is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
 
+[arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
 
 Please also cite the LCO CR datset if you used the Cosmic-CoNN `ground_imaging` model or the data in your research:
 
+Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
 
-> Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
+</p>
 
+<br/><br/>
 ## Installation
 
 We recommend installing Cosmic-CoNN in a new virutal enviroment, see the step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html). To get a ~10x speed-up with GPU acceleration, see [Install for a CUDA-enabled GPU](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
