@@ -69,7 +69,7 @@ Publication
         :width: 200
         :target: https://arxiv.org/abs/2106.14922
 
-This software is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+This software is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
 
 `deepCRarXiv:2106.14922 <https://arxiv.org/abs/2106.14922>`_, `NASA ADS <https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract>`_
 

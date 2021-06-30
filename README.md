@@ -27,7 +27,7 @@ The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO N
 <p>
 <a href="https://arxiv.org/abs/2106.14922"><img style="float: left; padding-right:30px;" src="https://cosmic-conn.readthedocs.io/en/latest/_images/paper_with_shadow.png"  width="220"/></a>
 
-This repository is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
 
 [arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
 
