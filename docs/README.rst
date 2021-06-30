@@ -66,7 +66,7 @@ Publication
 ===========
 
 .. image:: /_static/paper_with_shadow.png
-        :width: 200 px
+        :width: 200
         :target: https://arxiv.org/abs/2106.14922
 
 This software is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
