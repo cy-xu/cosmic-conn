@@ -65,9 +65,11 @@ The Cosmic-CoNN web app automatically finds large CRs for close inspection. It s
 Publication
 ===========
 
-This repository is supplement to our Cosmic-CoNN research paper, a thorough evaluation of the models' performance can be found in our `paper link pending <https://arxiv.org/>`_. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+.. figure:: /_static/paper_with_shadow.png
 
-bibtex penidng
+This software is part of our Cosmic-CoNN research paper. A thorough evaluation of the models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+
+`deepCRarXiv:2106.14922 <https://arxiv.org/abs/2106.14922>`_, `NASA ADS <https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract>`_
 
 Please also cite the LCO CR datset if you used the Cosmic-CoNN ``ground_imaging`` model or the data in your research:
 
