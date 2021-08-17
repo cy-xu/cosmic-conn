@@ -58,6 +58,11 @@ class TrainingOptions:
             help="batch | group | instance, feature normalization method",
         )
         self.parser.add_argument(
+            "--no_affine",
+            action="store_true",
+            help="do not use affine transformation in normalization",
+        )
+        self.parser.add_argument(
             "--n_group", type=int, default=8, help="fixed group number for group normalization "
         )
         self.parser.add_argument(

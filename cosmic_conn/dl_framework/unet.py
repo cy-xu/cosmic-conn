@@ -7,11 +7,13 @@ import torch.nn as nn
 
 
 class DoubleConv(nn.Module):
-    def __init__(self, in_ch, out_ch, norm, gn_setting):
+    def __init__(self, in_ch, out_ch, norm, norm_setting):
         super(DoubleConv, self).__init__()
 
         # group norm fixed/dynamic group numbers
-        group, channel = gn_setting
+        group, channel, no_affine = norm_setting
+        affine = not no_affine
+
         if group == 0 and channel > 0:
             # dynamically divide groups based on channel number
             n_group = max(1, int(out_ch // channel))
@@ -24,8 +26,8 @@ class DoubleConv(nn.Module):
                 "batch": nn.BatchNorm2d(
                     out_ch, momentum=0.005, affine=True, track_running_stats=True
                 ),
-                "group": nn.GroupNorm(n_group, out_ch),
-                "instance": nn.InstanceNorm2d(out_ch, affine=False),
+                "group": nn.GroupNorm(n_group, out_ch, affine=affine),
+                "instance": nn.InstanceNorm2d(out_ch, affine=affine),
             }
         )
 
@@ -44,11 +46,12 @@ class DoubleConv(nn.Module):
 
 
 class ResBlock(nn.Module):
-    def __init__(self, in_ch, out_ch, norm, gn_setting):
+    def __init__(self, in_ch, out_ch, norm, norm_setting):
         super(ResBlock, self).__init__()
 
         # group norm fixed/dynamic group numbers
-        group, channel = gn_setting
+        group, channel, no_affine = norm_setting
+
         if group == 0 and channel > 0:
             # dynamically divide groups based on channel number
             n_group = max(1, int(out_ch // channel))
@@ -69,7 +72,7 @@ class ResBlock(nn.Module):
                       stride=1, bias=True), norms[norm]
         )
 
-        self.double_conv = DoubleConv(in_ch, out_ch, norm, gn_setting)
+        self.double_conv = DoubleConv(in_ch, out_ch, norm, norm_setting)
         self.relu = nn.ReLU()
 
     def forward(self, x):
@@ -80,9 +83,9 @@ class ResBlock(nn.Module):
 
 
 class InConv(nn.Module):
-    def __init__(self, in_ch, out_ch, norm, n_group):
+    def __init__(self, in_ch, out_ch, norm, norm_setting):
         super(InConv, self).__init__()
-        self.conv = DoubleConv(in_ch, out_ch, norm, n_group)
+        self.conv = DoubleConv(in_ch, out_ch, norm, norm_setting)
 
     def forward(self, x):
         x = self.conv(x)
@@ -90,7 +93,7 @@ class InConv(nn.Module):
 
 
 class Down(nn.Module):
-    def __init__(self, in_ch, out_ch, norm, n_group, conv_type, down_type):
+    def __init__(self, in_ch, out_ch, norm, norm_setting, conv_type, down_type):
         super(Down, self).__init__()
 
         downs = nn.ModuleDict(
@@ -103,8 +106,8 @@ class Down(nn.Module):
 
         convs = nn.ModuleDict(
             {
-                "unet": DoubleConv(in_ch, out_ch, norm, n_group),
-                "resnet": ResBlock(in_ch, out_ch, norm, n_group),
+                "unet": DoubleConv(in_ch, out_ch, norm, norm_setting),
+                "resnet": ResBlock(in_ch, out_ch, norm, norm_setting),
             }
         )
 
@@ -116,7 +119,7 @@ class Down(nn.Module):
 
 
 class Up(nn.Module):
-    def __init__(self, in_ch, out_ch, norm, n_group, up_type):
+    def __init__(self, in_ch, out_ch, norm, norm_setting, up_type):
         super(Up, self).__init__()
 
         if up_type == "deconv":
@@ -134,7 +137,7 @@ class Up(nn.Module):
                 f"unknown up_type {up_type}, acceptable transconv, upscale"
             )
 
-        self.conv = DoubleConv(in_ch, out_ch, norm, n_group)
+        self.conv = DoubleConv(in_ch, out_ch, norm, norm_setting)
 
     def forward(self, x1, x2):
         x1 = self.up_conv(x1)
@@ -160,7 +163,7 @@ class UNet_module(nn.Module):
         n_classes,
         hidden,
         norm,
-        n_group,
+        norm_setting,
         conv_type,
         down_type,
         up_type,
@@ -169,23 +172,23 @@ class UNet_module(nn.Module):
         super(UNet_module, self).__init__()
         self.deeper = deeper
 
-        self.inc = InConv(n_channels, hidden, norm, n_group)
+        self.inc = InConv(n_channels, hidden, norm, norm_setting)
 
         self.down1 = Down(hidden, hidden * 2, norm,
-                          n_group, conv_type, down_type)
+                          norm_setting, conv_type, down_type)
 
         self.down2 = Down(hidden * 2, hidden * 4, norm,
-                          n_group, conv_type, down_type)
+                          norm_setting, conv_type, down_type)
 
         if deeper:
             self.down3 = Down(
-                hidden * 4, hidden * 8, norm, n_group, conv_type, down_type
+                hidden * 4, hidden * 8, norm, norm_setting, conv_type, down_type
             )
-            self.up3 = Up(hidden * 8, hidden * 4, norm, n_group, up_type)
+            self.up3 = Up(hidden * 8, hidden * 4, norm, norm_setting, up_type)
 
-        self.up2 = Up(hidden * 4, hidden * 2, norm, n_group, up_type)
+        self.up2 = Up(hidden * 4, hidden * 2, norm, norm_setting, up_type)
 
-        self.up1 = Up(hidden * 2, hidden, norm, n_group, up_type)
+        self.up1 = Up(hidden * 2, hidden, norm, norm_setting, up_type)
 
         self.outc = OutConv(hidden, n_classes)
 

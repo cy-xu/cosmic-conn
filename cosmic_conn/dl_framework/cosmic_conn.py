@@ -67,7 +67,7 @@ class Cosmic_CoNN(nn.Module):
         torch.set_default_dtype(torch.float32)
 
         # group norm parameters
-        groups = [opt.n_group, opt.gn_channel]
+        norm_setting = [opt.n_group, opt.gn_channel, opt.no_affine]
 
         # the network is defined here
         self.network = nn.DataParallel(
@@ -76,7 +76,7 @@ class Cosmic_CoNN(nn.Module):
                 n_classes=1,
                 hidden=opt.hidden,
                 norm=opt.norm,
-                n_group=groups,
+                norm_setting=norm_setting,
                 conv_type=opt.conv_type,
                 down_type=opt.down_type,
                 up_type=opt.up_type,
