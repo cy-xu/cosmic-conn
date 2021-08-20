@@ -12,8 +12,8 @@ with open("README.md") as readme_file:
 #     history = history_file.read()
 
 requirements = [
+    "torch==1.6.0",
     "numpy>=1.20.2",
-    "torch==1.8.0",
     "astropy>=4.2.1",
     "scikit-image>=0.18.1",
     "scikit-learn>=0.24.2",
