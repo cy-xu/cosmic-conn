@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 import torch.nn.init as init
 import torch.optim as optim
-from torch.utils.tensorboard import SummaryWriter
+
 
 # model import
 from cosmic_conn.dl_framework.utils_ml import (
@@ -25,8 +25,6 @@ from cosmic_conn.dl_framework.utils_ml import (
     remove_nan
 )
 from cosmic_conn.dl_framework.unet import UNet_module
-
-from cosmic_conn.cr_pipeline.utils_img import save_as_png
 
 
 class Cosmic_CoNN(nn.Module):
@@ -44,6 +42,17 @@ class Cosmic_CoNN(nn.Module):
         self.last_best_model = None
         self.best_valid_loss = float("inf")
         self.vis = []
+
+        # some packages are only needed for development
+        if opt.mode == "train":
+            try:
+                from torch.utils.tensorboard import SummaryWriter
+                from cosmic_conn.cr_pipeline.utils_img import save_as_png
+            except ImportError:
+                    raise ImportError(
+                        "Please run `pip install cosmic-conn[develop]` to install all packages for development."
+                    )
+
 
         if torch.cuda.is_available():
             self.device = torch.device("cuda")

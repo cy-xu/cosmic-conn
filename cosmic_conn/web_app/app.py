@@ -8,21 +8,27 @@ Boning Dong, CY Xu (cxu@ucsb.edu)
 import os
 import numpy as np
 from astropy.io import fits
-from flask_apscheduler import APScheduler
 from skimage.morphology import dilation, square
 
-from flask import (
-    Flask,
-    request,
-    render_template,
-    send_from_directory,
-    send_file,
-    make_response,
-    url_for,
-    jsonify,
-    abort,
-    session,
-)
+try:
+    from flask_apscheduler import APScheduler
+    from flask import (
+        Flask,
+        request,
+        render_template,
+        send_from_directory,
+        send_file,
+        make_response,
+        url_for,
+        jsonify,
+        abort,
+        session,
+    )
+except ImportError:
+    raise ImportError(
+        "Flask is not installed.\n"
+        "Please run `pip install cosmic-conn[webapp]` to install packages for the web app."
+    )
 
 from cosmic_conn.web_app.toolkit.astromsg import (
     FloatListPayload,

@@ -8,8 +8,7 @@ import numpy as np
 from astropy.io import fits
 
 from cosmic_conn.inference_cr import init_model
-from cosmic_conn.data_utils import download_test_data
-from cosmic_conn.cr_pipeline.utils_io import is_fits_file
+from cosmic_conn.data_utils import download_test_data, is_fits_file
 
 
 PREDICT_DIR = "cosmic_conn_output"
