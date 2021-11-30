@@ -11,10 +11,15 @@ from functools import partial
 import multiprocessing as mp
 import astropy.io.fits as fits
 
-from cosmic_conn.cr_pipeline.lco_cr_reduction import CR_reduction
-from cosmic_conn.cr_pipeline.nres_cr_reduction import NRES_CR_detector
-from cosmic_conn.cr_pipeline.utils_io import align_banzai, is_fits_file
-from cosmic_conn.cr_pipeline.options import argument_parser
+try:
+    from cosmic_conn.cr_pipeline.lco_cr_reduction import CR_reduction
+    from cosmic_conn.cr_pipeline.nres_cr_reduction import NRES_CR_detector
+    from cosmic_conn.cr_pipeline.utils_io import align_banzai, is_fits_file
+    from cosmic_conn.cr_pipeline.options import argument_parser
+except ImportError:
+    raise ImportError(
+        "Please run `pip install cosmic-conn[develop]` to install all packages for development."
+        )
 
 
 def reduce_LCO_CR_mask(fname, root, opt):

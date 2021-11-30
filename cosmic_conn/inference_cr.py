@@ -18,7 +18,6 @@ from astropy.io import fits
 from cosmic_conn.dl_framework.cosmic_conn import Cosmic_CoNN
 from cosmic_conn.data_utils import check_trained_models, console_arguments
 from cosmic_conn.data_utils import parse_input
-from cosmic_conn.web_app import app
 
 cudnn.enabled = True
 cudnn.benchmark = True
@@ -57,7 +56,7 @@ def init_model(model, opt=None):
 
     else:
         raise ValueError(
-            "...-m model can only be: ground_imaging | NRES | HST_ACS_WFC"
+            "-m [ground_imaging | NRES | HST_ACS_WFC | path_to.pth | path_to.pth.tar]"
         )
 
     # init model instance
@@ -149,6 +148,7 @@ def CLI_entry_point():
 
     if opt.app:
         # launch web-app
+        from cosmic_conn.web_app import app        
         app.main(cr_model, opt)
     else:
         # batch processing FITS

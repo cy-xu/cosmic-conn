@@ -11,11 +11,15 @@ import glob
 import requests
 import zipfile
 from pathlib import Path
-from cosmic_conn.cr_pipeline.utils_io import is_fits_file
 
 PYTEST_DATA_URL = "https://sites.cs.ucsb.edu/~cy.xu/cosmic_conn/Cosmic-CoNN_test_data.zip"
 MODEL_URL = "https://sites.cs.ucsb.edu/~cy.xu/cosmic_conn/trained_models.zip"
 
+EXTENSIONS = ["fits", "fz"]
+
+def is_fits_file(filename):
+    filename = filename.lower()
+    return any(filename.endswith(extension) for extension in EXTENSIONS)
 
 def download_file(url):
     local_filename = url.split('/')[-1]
@@ -109,6 +113,7 @@ def console_arguments():
     # supplement options required for model but not from user
     opt.mode = "inference"
     opt.norm = "group"
+    opt.no_affine = False
     opt.expr_dir = "/."
     opt.n_group = 8
     opt.gn_channel = 0

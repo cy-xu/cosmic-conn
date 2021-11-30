@@ -2,7 +2,6 @@
 
 """The setup script."""
 
-import os
 from setuptools import setup, find_packages
 
 with open("README.md") as readme_file:
@@ -12,20 +11,22 @@ with open("README.md") as readme_file:
 #     history = history_file.read()
 
 requirements = [
-    "torch==1.6.0",
-    "numpy>=1.20.2",
-    "astropy>=4.2.1",
-    "scikit-image>=0.18.1",
-    "scikit-learn>=0.24.2",
-    "sep>=1.1.1",
-    "tensorboard>=2.4.1",
-    "reproject>=0.7.1",
-    "Flask>=1.1.2",
-    "Flask-APScheduler>=1.12.2",
-    "psutil>=5.8.0",
+    "torch>=1.6.0",
+    "numpy",
+    "astropy>=3.0",
+    "reproject", 
+    "sep",
+    "scikit-image",
+    "psutil",
     "pretty-errors",
     "tqdm",
+    "requests",
 ]
+
+extras_require = {    
+    "webapp": ["Flask>=1.1.0", "Flask-APScheduler>=1.12.0"],
+    "develop": ["tensorboard>=2.4.0", "scikit-learn>=0.24.0", "Flask>=1.1.0", "Flask-APScheduler>=1.12.0"],
+}
 
 setup_requirements = [
     "pytest-runner",
@@ -68,6 +69,7 @@ setup(
         ],
     },
     install_requires=requirements,
+    extras_require=extras_require,
     dependency_links=[
         '-f https://download.pytorch.org/whl/torch_stable.html'],
     license="GNU General Public License v3",
@@ -88,6 +90,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/cy-xu/cosmic-conn",
-    version="0.2.3",
+    version="0.2.4",
     zip_safe=False,
 )

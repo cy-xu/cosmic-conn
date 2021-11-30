@@ -40,10 +40,19 @@ Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep.
 <br/><br/>
 ## Installation
 
+*We recently added optional dependencies install for pip.*
+
 We recommend installing Cosmic-CoNN in a new virutal enviroment, see the step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html). To get a ~10x speed-up with GPU acceleration, see [Install for a CUDA-enabled GPU](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
 
 ```console
+  # basic install for CR detection or library integration
   $ pip install cosmic-conn
+
+  # include Flask for the web app interface
+  $ pip install cosmic-conn[webapp] 
+
+  # install all dependencies for development
+  $ pip install cosmic-conn[develop] 
 ```
 
 ## Command line interface
@@ -78,6 +87,10 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
 ```
 
 ## Web app
+
+```console
+  $ cosmic-conn -a ground_imaging -e SCI
+```
 
 The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable thresholds for different types of observations:
 

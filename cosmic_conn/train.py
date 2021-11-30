@@ -14,9 +14,14 @@ import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
 
-from cosmic_conn.dl_framework.options import TrainingOptions
-from cosmic_conn.dl_framework.dataloader import CreateDataLoader
-from cosmic_conn.dl_framework.cosmic_conn import Cosmic_CoNN
+try:
+    from cosmic_conn.dl_framework.options import TrainingOptions
+    from cosmic_conn.dl_framework.dataloader import CreateDataLoader
+    from cosmic_conn.dl_framework.cosmic_conn import Cosmic_CoNN
+except ImportError:
+    raise ImportError(
+        "Please run `pip install cosmic-conn[develop]` to install all packages for development."
+        )
 
 
 def setup_seed(seed):
