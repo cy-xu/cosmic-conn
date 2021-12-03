@@ -25,6 +25,7 @@ from cosmic_conn.dl_framework.utils_ml import (
     remove_nan
 )
 from cosmic_conn.dl_framework.unet import UNet_module
+from cosmic_conn.cr_pipeline.utils_img import save_as_png
 
 
 class Cosmic_CoNN(nn.Module):
@@ -42,17 +43,6 @@ class Cosmic_CoNN(nn.Module):
         self.last_best_model = None
         self.best_valid_loss = float("inf")
         self.vis = []
-
-        # some packages are only needed for development
-        if opt.mode == "train":
-            try:
-                from torch.utils.tensorboard import SummaryWriter
-                from cosmic_conn.cr_pipeline.utils_img import save_as_png
-            except ImportError:
-                    raise ImportError(
-                        "Please run `pip install cosmic-conn[develop]` to install all packages for development."
-                    )
-
 
         if torch.cuda.is_available():
             self.device = torch.device("cuda")
@@ -139,10 +129,22 @@ class Cosmic_CoNN(nn.Module):
                 self.optimizer, milestones=milestones, gamma=0.1
             )
 
+            # only import tensorboard for training
+            try:
+                from torch.utils.tensorboard import SummaryWriter
+            except ImportError:
+                raise ImportError(
+                    "Please run `pip install cosmic-conn[develop]` to install all packages for development."
+                )
+
         # Inference or continue training
 
-        if opt.mode == "inference" and opt.load_model:
+        if opt.mode == "inference":
             # inference only
+
+            if len(opt.load_model) == 0:
+                raise ValueError("Please specify the path to load model file -m.")
+
             checkpoint = torch.load(opt.load_model, map_location=self.device)
 
             if opt.load_model.endswith("pth"):

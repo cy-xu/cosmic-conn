@@ -16,6 +16,7 @@ import torch.backends.cudnn as cudnn
 from astropy.io import fits
 
 from cosmic_conn.dl_framework.cosmic_conn import Cosmic_CoNN
+from cosmic_conn.dl_framework.options import ModelOptions
 from cosmic_conn.data_utils import check_trained_models, console_arguments
 from cosmic_conn.data_utils import parse_input
 
@@ -28,14 +29,14 @@ TEMP_DIR = "instance_temp_storage"
 
 def init_model(model, opt=None):
     """Models are initialized here by passing in the keyword.
-    return a pytorch Module and model options.
+    return a pytorch model.
     """
     print("Initializing Cosmic-CoNN CR detection model...")
 
     model_dir = check_trained_models()
 
     if opt is None:
-        opt = console_arguments()
+        opt = ModelOptions()
 
     # overwrite model if init_model is called directly
     opt.model = model
@@ -56,7 +57,7 @@ def init_model(model, opt=None):
 
     else:
         raise ValueError(
-            "-m [ground_imaging | NRES | HST_ACS_WFC | path_to.pth | path_to.pth.tar]"
+            "-m [ground_imaging | NRES | HST_ACS_WFC | model_file(.pth/.tar)]"
         )
 
     # init model instance
@@ -65,11 +66,12 @@ def init_model(model, opt=None):
     cr_model.eval()
 
     print(f"{opt.model} model initialized.\n")
-    return cr_model, opt
+    return cr_model
 
 
-def detect_FITS(model, options):
+def detect_FITS(model):
     # get arguments from user
+    options = model.opt
     all_fits = parse_input(options.input, PREDICT_DIR)
     ext = model.opt.ext
 
@@ -135,16 +137,15 @@ def detect_FITS(model, options):
     return 0
 
 
-def detect_image(image, model="ground_imaging", ret_numpy=True):
-    cr_model, opt = init_model(model)
+def detect_image(cr_model, image, ret_numpy=True):
     cr_mask = cr_model.detect_cr(image.astype("float32"), ret_numpy=ret_numpy)
     return cr_mask
 
 
 def CLI_entry_point():
-    # main entry point form CLI detection or web app
+    # entry point form CLI detection or web app
     opt = console_arguments()
-    cr_model, opt = init_model(opt.model, opt)
+    cr_model = init_model(opt.model, opt)
 
     if opt.app:
         # launch web-app
@@ -152,4 +153,4 @@ def CLI_entry_point():
         app.main(cr_model, opt)
     else:
         # batch processing FITS
-        detect_FITS(cr_model, opt)
+        detect_FITS(cr_model)

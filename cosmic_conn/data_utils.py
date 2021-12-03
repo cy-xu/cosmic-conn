@@ -11,6 +11,7 @@ import glob
 import requests
 import zipfile
 from pathlib import Path
+from cosmic_conn.dl_framework.options import ModelOptions
 
 PYTEST_DATA_URL = "https://sites.cs.ucsb.edu/~cy.xu/cosmic_conn/Cosmic-CoNN_test_data.zip"
 MODEL_URL = "https://sites.cs.ucsb.edu/~cy.xu/cosmic_conn/trained_models.zip"
@@ -109,26 +110,14 @@ def console_arguments():
     )
 
     opt = parser.parse_args()
+    opt = vars(opt)
 
-    # supplement options required for model but not from user
-    opt.mode = "inference"
-    opt.norm = "group"
-    opt.no_affine = False
-    opt.expr_dir = "/."
-    opt.n_group = 8
-    opt.gn_channel = 0
-    opt.hidden = 32
-    opt.conv_type = "unet"
-    opt.down_type = "maxpool"
-    opt.up_type = "deconv"
-    opt.deeper = False
-    opt.loss = 0
-    opt.lr = 0
-    opt.milestones = ['0']
-    opt.continue_train = False
-    opt.data = "./"
+    # swtich to custom class from argparse dict
+    model_options = ModelOptions()
+    for k, v in opt.items():
+        model_options[k] = v
 
-    return opt
+    return model_options
 
 
 def parse_input(input, PREDICT_DIR):
