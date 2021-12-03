@@ -7,6 +7,79 @@ import argparse
 import os
 import datetime
 
+class ModelOptions():
+    def __init__(self):
+        # init default model options
+        
+        # training and model settings
+        self.__dict__["data"] = "./"
+        self.__dict__["max_train_size"] = 0
+        self.__dict__["mode"] = "inference"
+        self.__dict__["model"] = "lco"
+        self.__dict__["loss"] = 0
+        self.__dict__["imbalance_alpha"] = 100.0
+        self.__dict__["norm"] = "group"
+        self.__dict__["no_affine"] = False
+        self.__dict__["n_group"] = 8
+        self.__dict__["gn_channel"] = 0
+        self.__dict__["conv_type"] = "unet"
+        self.__dict__["up_type"] = "deconv"
+        self.__dict__["down_type"] = "maxpool"
+        self.__dict__["deeper"] = False
+        self.__dict__["crop"] = 1024
+        self.__dict__["batch"] = 4
+        self.__dict__["hidden"] = 32
+        self.__dict__["lr"] = 0.001
+        self.__dict__["eval_epoch"] = 10
+        self.__dict__["min_exposure"] = 0.0
+        self.__dict__["epoch"] = 3000
+        self.__dict__["milestones"] = ['0']
+        self.__dict__["seed"] = 0
+        self.__dict__["random_seed"] = False
+        self.__dict__["comment"] = ""
+
+        # validation/test settings
+        self.__dict__["load_model"] = ""
+        self.__dict__["validate_freq"] = 1
+        self.__dict__["validRatio"] = 0.2
+        self.__dict__["max_valid_size"] = 0
+        self.__dict__["valid_crop"] = 2000
+
+        # continue training
+        self.__dict__["continue_train"] = ""
+        self.__dict__["continue_epoch"] = 0
+
+        self.__dict__["expr_dir"] = "./"
+        self.__dict__["log_file"] = ""
+        self.__dict__["prefix"] = ""
+
+        # inference settings
+        self.__dict__["app"] = False
+        self.__dict__["input"] = "./"
+        self.__dict__["ext"] = "SCI"
+
+
+    def __setitem__(self, key, value):
+        self.__dict__[key] = value
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __delitem__(self, key):
+        del self.__dict__[key]
+
+    def __len__(self):
+        return len(self.__dict__)
+
+    def keys(self):
+        return self.__dict__.keys()
+
+    def values(self):
+        return self.__dict__.values()
+
+    def items(self):
+        return self.__dict__.items()
+
 
 class TrainingOptions:
     def __init__(self):
@@ -184,7 +257,13 @@ class TrainingOptions:
 
             self.opt.log_file = file_name
 
-        return self.opt
+        # swtich to custom class from argparse dict
+        model_options = ModelOptions()
+        for k, v in args.items():
+            model_options[k] = v
+
+        return model_options
+
 
     def mkCheckpointDir(self, opt):
         suffix = opt.comment

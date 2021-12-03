@@ -76,7 +76,7 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
   from cosmic_conn import init_model
 
   # initialize a Cosmic-CoNN model
-  cr_model, opt = init_model("ground_imaging")
+  cr_model = init_model("ground_imaging")
 
   # the model outputs a CR probability map in np.float32
   cr_prob = cr_model.detect_cr(image)

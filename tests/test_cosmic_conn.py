@@ -47,7 +47,7 @@ def inference_on_test_data(opt, model):
 
 class Test_model_inference:
     def test_lco_imaging(self):
-        model, opt = init_model("ground_imaging")
-        opt.input = DATA_PATH
+        model = init_model("ground_imaging")
+        model.opt.input = DATA_PATH
 
-        inference_on_test_data(opt, model)
+        inference_on_test_data(model.opt, model)

@@ -3,3 +3,5 @@
 __author__ = """Chengyuan Xu, Curtis McCully, Boning Dong, D. Andrew Howell, and Pradeep Sen"""
 __email__ = "cxu@ucsb.edu"
 __version__ = "0.2.4"
+
+from cosmic_conn.inference_cr import init_model, detect_image, detect_FITS

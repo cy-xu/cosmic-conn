@@ -52,7 +52,7 @@ def memory_check(device):
         full_image_detection = t > GPU_THRESHOLD
 
     if not full_image_detection:
-        print(f"...available memory not sufficient for single iteration detection.")
+        print(f"...available memory not sufficient for whole image detection.")
         print(f"...image will be sliced into stamps.")
 
     return full_image_detection
