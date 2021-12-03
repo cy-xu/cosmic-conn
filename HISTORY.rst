@@ -2,6 +2,11 @@
 History
 =======
 
+0.2.5 (2021-12-03)
+    - Manage trained models by Git LFS
+
+------------------
+
 0.2.4 (2021-11-30)
     - Added pip optional dependencies install support.
     - pip install cosmic-conn # basic install for CR detection

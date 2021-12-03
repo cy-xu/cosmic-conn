@@ -23,7 +23,7 @@ Batch processing multiple FITS file by specifying the input directory with ``-i`
   # to process a single file::
   $ cosmic-conn -i input_dir/target_file.fits.fz
 
-**Specifying FITS extenion for data**
+**Specifying FITS extension for data**
   
 Use ``-e`` or ``--ext`` to define which extenion to read data from, by default We read the first valid image array in the order of hdul[0] -> hdul[1] -> hdul['SCI'] unless user provided a extion name to overrid::
 
@@ -46,7 +46,7 @@ The ``-a`` or ``--app`` arguments will launch a *local instance* of the web-base
 
   $ cosmic-conn -a
 
-The generic ``ground_imaging`` model is loaded by default, here is a shorthand to launch the web app with the NRES model and read image from the SPECTRUM extion:
+The generic ``ground_imaging`` model is loaded by default, here is a shorthand to launch the web app with the NRES model and read image from the SPECTRUM extension:
 
 .. code-block:: console
 
@@ -57,7 +57,7 @@ The generic ``ground_imaging`` model is loaded by default, here is a shorthand t
 
   The Cosmic-CoNN web app interface.
 
-The preview windows help you to verify the results immediately after detection. We provided a few common scaling method for visualzation, ``zscale`` is applied by default. You could also manually define the MIN-MAX range to disply, and their mapping to the ``UINT8`` image. The pointer location shows the true pixel value at the bottom-left corner.
+The preview windows help you to verify the results immediately after detection. We provided common scaling methods for visualzation, ``zscale`` is applied by default. You could also manually define the MIN-MAX range to disply, and their mapping to the ``UINT8`` image. The pointer location shows the true pixel value at the bottom-left corner.
 
 The editing tools on top of the mask preview windows help you to fine-tune the threshold and morphological dilation applied to the probability mask to acquire a binary mask that suits your data. A new copy of the FITS with the masks appended is saved in ``cosmic_conn_output`` of the working directory. The ``Download`` button will append the edited binary mask to the FITS.
 
@@ -80,7 +80,7 @@ Adopting CR detection in your data workflow is simple. Let ``image`` be a two-di
   from cosmic_conn import init_model
 
   # initialize a Cosmic-CoNN model
-  cr_model, opt = init_model("ground_imaging")
+  cr_model = init_model("ground_imaging")
 
   # the model outputs a CR probability map in np.float32
   cr_prob = cr_model.detect_cr(image)
@@ -90,7 +90,7 @@ Adopting CR detection in your data workflow is simple. Let ``image`` be a two-di
 
 The returned array ``cr_prob`` is the predicted probability of each pixel being affected by CR, where :math:`\text{cr_prob}_{ij} \in [0, 1]`. A threshold of 0.5 is suitable for most data but using the interactive preview in the `Web-based app`_ could help find the suitable parameters based on your data. 
 
-Lowering the threshold will include more peripheral CR pixels and applying morphological dilation will enlarge mask for the detected CRs. To dilate the mask by one pixel:
+Lowering the threshold will include more peripheral CR pixels and applying morphological dilation will enlarge mask areas for the detected CRs. To dilate the mask by one pixel:
 
 .. code-block:: python
 

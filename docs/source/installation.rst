@@ -44,7 +44,7 @@ There are many resources online to help you configure the right Nvidia driver an
 .. image:: ../_static/verify_gpu.png
         :alt: an image shows Nvidia driver and CUDA properly configured
 
-If you see a similar output, congratulations! You are very close to enjoy GPU acceleration. Now please visit ``PyTorch`` installation guide to generate the correct installation command based on your  environment: https://pytorch.org/get-started/locally/. Select one of the CUDA versions for the ``Compute Platform`` condition. 
+If you see a similar output, congratulations! You are very close to enjoy GPU acceleration. Now please visit ``PyTorch`` installation guide to generate the correct installation command based on your environment: https://pytorch.org/get-started/locally/. Select one of the CUDA versions for the ``Compute Platform`` condition. 
 
 To verify PyTorch is correctly configured for GPU, you should see:
 
@@ -67,7 +67,14 @@ Install for CPU
 
 Install with `pip`::
     
+    # basic install for CR detection or library integration
     $ pip install cosmic-conn
+
+    # include Flask for the web app interface
+    $ pip install cosmic-conn[webapp] 
+
+    # install all dependencies for development
+    $ pip install cosmic-conn[develop] 
 
 .. $ pip install -i https://test.pypi.org/simple/ cosmic-conn
 
