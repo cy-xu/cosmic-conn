@@ -66,11 +66,11 @@ def download_trained_models(model_path):
 
 
 def check_trained_models():
-    parent_dir = str(Path(__file__).parent.absolute())
-    model_dir = os.path.join(parent_dir, "trained_models")
+    # parent_dir = str(Path(__file__).parent.absolute())
+    model_dir = os.path.join("cosmic_conn", "trained_models")
     models = glob.glob(model_dir + "/*.pth")
     if len(models) < 3:
-        download_trained_models(parent_dir)
+        raise ValueError("models not found in trained_models directory.")
     return model_dir
 
 

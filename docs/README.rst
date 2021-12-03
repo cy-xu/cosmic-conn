@@ -9,7 +9,7 @@ A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
 
 Cosmic-CoNN is an end-to-end solution to help tackle the cosmic ray (CR) detection problem in CCD-captured astronomical images. It includes a deep-learning framework, high-performance CR detection models, a new dataset, and a suite of tools to use to the models, shown in the figure above:
 
-1. `LCO CR dataset <https://zenodo.org/record/5034763>`_, a large, diverse cosmic ray dataset  consists of over 4,500 scientific images from `Las Cumbres Observatory <https://lco.global/>`_ (LCO) global telescope network's 23 instruments. CRs are labeled accurately and consistently across many diverse observations from various instruments. To the best of our knowledge, this is the largest dataset of its kind. 
+1. `LCO CR dataset <https://zenodo.org/record/5034763>`_, a large, diverse cosmic ray dataset that consists of over 4,500 scientific images from `Las Cumbres Observatory <https://lco.global/>`_ (LCO) global telescope network's 23 instruments. CRs are labeled accurately and consistently across many diverse observations from various instruments. To the best of our knowledge, this is the largest dataset of its kind. 
 
 2. A `PyTorch <https://pytorch.org/>`_ deep-learning framework that trains generic, robust CR detection models for ground- and space-based imaging data, as well as spectroscopic observations.
 
@@ -18,12 +18,12 @@ Cosmic-CoNN is an end-to-end solution to help tackle the cosmic ray (CR) detecti
 .. figure:: /_static/fig11_gemini_results_demo.png
         :alt: Detection demo on Gemini data
 
-        Visual inspection of Cosmic-CoNNCR detection results. Detecting CRs in a Gemini GMOS-N 1×1 binning image with our generic ``ground-imaging`` model. The model was trained entirely on LCO data yet all visible CRs in the image stamp are correctly detected regardless of their shapes or sizes.
+        Visual inspection of Cosmic-CoNN CR detection results. Detecting CRs in a Gemini GMOS-N 1×1 binning image with our generic ``ground-imaging`` model. The model was trained entirely on LCO data yet all visible CRs in the image stamp are correctly detected regardless of their shapes or sizes.
 
 .. figure:: /_static/fig11_nres_result_0034_1.png
         :alt: Detection demo on LCO NRES data
 
-        The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO NRES spectroscopic image. The horizontal bands in the left image are the spectroscopicorders, which are left out of the CR mask.
+        The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO NRES spectroscopic image. The horizontal bands in the left image are the spectroscopic orders, which are left out of the CR mask.
 
 Command line interface
 ======================
@@ -32,7 +32,7 @@ After :ref:`install_label`, you can start detecting CRs in your FITS files right
 
   $ cosmic-conn -m ground_imaging -e SCI -i input_dir
 
-This command launches a generic ``gorund_imaging`` model to detect cosmic rays. It reads data from the SCI extention in a FITS file and process all files in the input_dir. We also provide the ``NRES`` model for CR detection in spectroscopic data and the ``HST_ACS_WFC`` model for Hubble ACS/WFC imaging data. You could also find more Hubble Space Telescope CR detection and inpainting models trained by `deepCR <https://github.com/profjsb/deepCR>`_.
+This command launches a generic ``gorund_imaging`` model to detect cosmic rays. It reads data from the SCI extension in a FITS file and processes all files in the input_dir. We also provide the ``NRES`` model for CR detection in spectroscopic data and the ``HST_ACS_WFC`` model for Hubble ACS/WFC imaging data. You could also find more Hubble Space Telescope CR detection and inpainting models trained by `deepCR <https://github.com/profjsb/deepCR>`_.
 
 Python APIs
 ===========
@@ -44,7 +44,7 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
   from cosmic_conn import init_model
 
   # initialize a Cosmic-CoNN model
-  cr_model, opt = init_model("ground_imaging")
+  cr_model = init_model("ground_imaging")
 
   # the model outputs a CR probability map in np.float32
   cr_prob = cr_model.detect_cr(image)
@@ -69,11 +69,11 @@ Publication
         :width: 200
         :target: https://arxiv.org/abs/2106.14922
 
-This software is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, pleaes cite our paper:
+This software is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper:
 
 `deepCRarXiv:2106.14922 <https://arxiv.org/abs/2106.14922>`_, `NASA ADS <https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract>`_
 
-Please also cite the LCO CR datset if you used the Cosmic-CoNN ``ground_imaging`` model or the data in your research:
+Please also cite the LCO CR dataset if you used the Cosmic-CoNN ``ground_imaging`` model or the data in your research:
 
 Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
 

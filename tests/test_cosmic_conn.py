@@ -49,5 +49,6 @@ class Test_model_inference:
     def test_lco_imaging(self):
         model = init_model("ground_imaging")
         model.opt.input = DATA_PATH
+        print(f"trained models loaded from {model.opt.load_model}")
 
         inference_on_test_data(model.opt, model)
