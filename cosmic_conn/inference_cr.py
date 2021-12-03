@@ -25,6 +25,7 @@ cudnn.benchmark = True
 
 PREDICT_DIR = "cosmic_conn_output"
 TEMP_DIR = "instance_temp_storage"
+MODEL_VERSON = "0.2.2"
 
 
 def init_model(model, opt=None):
@@ -43,14 +44,14 @@ def init_model(model, opt=None):
 
     # model path
     if opt.model == "ground_imaging":
-        opt.load_model = f"{model_dir}/cosmic-conn_ground_imaging.pth.tar"
+        opt.load_model = f"{model_dir}/cosmic-conn_ground_imaging_v{MODEL_VERSON}.pth"
 
     elif opt.model == "NRES":
-        opt.load_model = f"{model_dir}/cosmic-conn_LCO_NRES.pth.tar"
+        opt.load_model = f"{model_dir}/cosmic-conn_LCO_NRES_v{MODEL_VERSON}.pth"
 
     elif opt.model == "HST_ACS_WFC":
         opt.norm = "batch"
-        opt.load_model = f"{model_dir}/cosmic-conn_HST_ACS_WFC.pth.tar"
+        opt.load_model = f"{model_dir}/cosmic-conn_HST_ACS_WFC_v{MODEL_VERSON}.pth"
 
     elif opt.model.endswith("tar") or opt.model.endswith("pth"):
         opt.load_model = opt.model

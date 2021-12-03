@@ -68,7 +68,7 @@ def download_trained_models(model_path):
 def check_trained_models():
     parent_dir = str(Path(__file__).parent.absolute())
     model_dir = os.path.join(parent_dir, "trained_models")
-    models = glob.glob(model_dir + "/*.tar")
+    models = glob.glob(model_dir + "/*.pth")
     if len(models) < 3:
         download_trained_models(parent_dir)
     return model_dir
