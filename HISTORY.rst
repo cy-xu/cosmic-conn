@@ -2,8 +2,8 @@
 History
 =======
 
-0.2.5 (2021-12-03)
-    - Manage trained models by Git LFS
+0.2.6 (2021-12-03)
+    - Trained models added to git repository
 
 ------------------
 
