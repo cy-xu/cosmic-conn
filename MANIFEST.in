@@ -5,8 +5,9 @@ include README.rst
 
 recursive-include cosmic_conn/web_app *
 recursive-include cosmic_conn/scripts *
-
+recursive-include cosmic_conn/trained_models *.pth
 recursive-include tests *
+
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 

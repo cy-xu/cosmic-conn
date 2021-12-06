@@ -2,7 +2,7 @@
 History
 =======
 
-0.2.6 (2021-12-03)
+0.2.7 (2021-12-03)
     - Trained models added to git repository
 
 ------------------
