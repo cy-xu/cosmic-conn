@@ -90,6 +90,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/cy-xu/cosmic-conn",
-    version="0.2.5",
+    version="0.2.6",
     zip_safe=False,
 )
