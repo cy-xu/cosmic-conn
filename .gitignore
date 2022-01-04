@@ -3,7 +3,6 @@
 *.fits
 *.fz
 *.zip
-*.pth
 *.lprof
 *.out
 *.pdf
@@ -12,9 +11,7 @@
 *.csv
 
 # ignored dirs
-trained_models
 cosmic_conn/data
-cosmic_conn/trained_models
 demo_data
 slurm
 checkpoints*

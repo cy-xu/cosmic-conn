@@ -4,6 +4,7 @@ CY Xu (cxu@ucsb.edu)
 """
 import os
 import math
+import logging
 import datetime
 import random
 import psutil
@@ -40,9 +41,11 @@ def memory_check(device):
     GPU_THRESHOLD = 8 * (1024**3)  # 8 GB free memory
 
     if str(device) == 'cpu':
-        # on CPU, available memory
-        available_memory = psutil.virtual_memory()[1]
-        full_image_detection = available_memory > CPU_THRESHOLD
+        # available memory on CPU is not reliable, defult to 1024 stamps
+        # available_memory = psutil.virtual_memory()[1]
+        # full_image_detection = available_memory > CPU_THRESHOLD
+        full_image_detection = False
+
     else:
         # GPU available memory
         t = torch.cuda.get_device_properties(device).total_memory
@@ -52,8 +55,10 @@ def memory_check(device):
         full_image_detection = t > GPU_THRESHOLD
 
     if not full_image_detection:
-        print(f"...available memory not sufficient for whole image detection.")
-        print(f"...image will be sliced into stamps.")
+        msg = f"...available memory not sufficient for whole image detection."
+        msg2 = f"...image will be sliced into stamps."
+        logging.warning(msg)
+        logging.warning(msg2)
 
     return full_image_detection
 

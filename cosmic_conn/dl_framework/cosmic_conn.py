@@ -6,6 +6,7 @@ CY Xu (cxu@ucsb.edu)
 import os
 import math
 import random
+import logging
 
 import torch
 import torch.nn as nn
@@ -46,11 +47,12 @@ class Cosmic_CoNN(nn.Module):
 
         if torch.cuda.is_available():
             self.device = torch.device("cuda")
-            print("...GPU found, yeah!")
+            logging.info("...GPU found, yeah!")
+            
         else:
             self.device = torch.device("cpu")
-            print("...GPU or CUDA not detected, using CPU (slower). ")
-            print("...training on CPU is not recommended.")
+            logging.info("...GPU or CUDA not detected, using CPU (slower). ")
+            logging.info("...training on CPU is not recommended.")
 
         self.model_dir = os.path.join(opt.expr_dir, "models")
         self.valid_dir = os.path.join(opt.expr_dir, "validation")
@@ -69,8 +71,7 @@ class Cosmic_CoNN(nn.Module):
         norm_setting = [opt.n_group, opt.gn_channel, opt.no_affine]
 
         # the network is defined here
-        self.network = nn.DataParallel(
-            UNet_module(
+        self.network = UNet_module(
                 n_channels=1,
                 n_classes=1,
                 hidden=opt.hidden,
@@ -81,7 +82,6 @@ class Cosmic_CoNN(nn.Module):
                 up_type=opt.up_type,
                 deeper=opt.deeper,
             )
-        )
 
         self.network.to(self.device)
 
@@ -153,7 +153,7 @@ class Cosmic_CoNN(nn.Module):
                 self.network.load_state_dict(checkpoint["state_dict_mask"])
 
             # use available memory to determine detection method
-            self.full_image_detection = memory_check(self.device)
+            # self.full_image_detection = memory_check(self.device)
 
         elif opt.mode == "train" and opt.continue_train:
             # initialize with previously saved model, but new optimizer
@@ -212,31 +212,37 @@ class Cosmic_CoNN(nn.Module):
         mask[: pdt.shape[0], : pdt.shape[1]] = pdt
         return mask
 
-    def detect_image_stamps(self, image, verbose=True):
+    def detect_image_stamps(self, image, crop=1024):
         # if not enough memory, detect in smaller stamps
         mask = None
-        stamp_sizes = [1024, 512, 256]
+
+        # by defualt we use smaller stamp size as memory safeguard
+        stamp_sizes = [1024, 512, 256] if crop==1024 else [crop]
 
         for stamp in stamp_sizes:
             try:
-                if verbose:
-                    print(
-                        f"Slicing image to {stamp}x{stamp} stamps...",
-                    )
+                msg = f"Slicing image to {stamp}x{stamp} stamps..."
+                logging.info(msg)
+
                 torch.cuda.empty_cache()
 
                 mask = clean_large(
                     image, self.network, patch=stamp, overlap=0
                 )
             except:
-                print(f"...{stamp}x{stamp} stamp won't fit into memory.")
+                logging.warning(f"...{stamp}x{stamp} stamp won't fit into memory.")
 
             if mask is not None:
                 break
+        
+        if mask is None:
+            msg = "...detection failed. Memory too small?"
+            logging.error(msg)
+            raise ValueError(msg)
 
-        assert mask is not None, f"...detection failed.\n Memory too small?"
         return mask
 
+    # @torch.jit.export
     def detect_cr(self, image, ret_numpy=True):
         # replace NaN with 0.0 if exist
         image = remove_nan(image)
@@ -247,14 +253,12 @@ class Cosmic_CoNN(nn.Module):
 
         # no gradient saved during inference
         with torch.no_grad():
-            if self.full_image_detection:
-                try:
-                    # on CPU, instance might be killed without raising error
-                    mask = self.detect_full_image(image)
-                except:
-                    mask = self.detect_image_stamps(image)
+            if self.opt.crop == 0:
+                # full image detection as user requested
+                mask = self.detect_full_image(image)
             else:
-                mask = self.detect_image_stamps(image)
+                # slice image into smaller stamps
+                mask = self.detect_image_stamps(image, self.opt.crop)
 
         if ret_numpy:
             return tensor2np(mask)
@@ -416,7 +420,7 @@ class Cosmic_CoNN(nn.Module):
                 pdt_masks = torch.zeros_like(frames)
 
                 for j in range(b):
-                    pdt = self.detect_image_stamps(frames[j].squeeze(), False)
+                    pdt = self.detect_image_stamps(frames[j].squeeze())
                     pdt_masks[j] = pdt.unsqueeze(dim=0)
 
                 # pdt_masks = self.detect_image_stamps(frames)
