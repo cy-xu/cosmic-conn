@@ -57,6 +57,7 @@ class ModelOptions():
         self.__dict__["app"] = False
         self.__dict__["input"] = "./"
         self.__dict__["ext"] = "SCI"
+        self.__dict__["verbose"] = False
 
 
     def __setitem__(self, key, value):

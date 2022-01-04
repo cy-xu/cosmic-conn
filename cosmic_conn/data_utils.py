@@ -108,6 +108,14 @@ def console_arguments():
         default="SCI",
         help="read data from this hdul extension, SCI by default."
     )
+    parser.add_argument(
+        "-c",
+        "--crop",
+        type=int,
+        default=1024,
+        help="slice the image to stamps of this size, 1024 by default."
+        "Set to 0 for full image detection, large memory required."
+    )
 
     opt = parser.parse_args()
     opt = vars(opt)

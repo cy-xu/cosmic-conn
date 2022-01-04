@@ -2,6 +2,15 @@
 History
 =======
 
+0.2.8 (2022-01-04)
+    - added `-c` option to CLI to specify crop size for stamp detection
+    - stop using memory_check(), which is not robust on server nodes
+    - moved messages to logger, stdout turned on only for CLI users
+    - removed trained models' DataParallel wrapper
+    - new threshold-based plots for BANZAI integration
+
+------------------
+
 0.2.7 (2021-12-03)
     - Trained models added to git repository
 

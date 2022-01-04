@@ -7,8 +7,10 @@ CY Xu (cxu@ucsb.edu)
 """
 
 import os
+import sys
 import time
 import shutil
+import logging
 from tqdm import tqdm
 import pretty_errors
 
@@ -25,22 +27,33 @@ cudnn.benchmark = True
 
 PREDICT_DIR = "cosmic_conn_output"
 TEMP_DIR = "instance_temp_storage"
-MODEL_VERSON = "0.2.2"
+MODEL_VERSON = "0.2.8"
 
 
 def init_model(model, opt=None):
     """Models are initialized here by passing in the keyword.
     return a pytorch model.
     """
-    print("Initializing Cosmic-CoNN CR detection model...")
-
     model_dir = check_trained_models()
 
     if opt is None:
         opt = ModelOptions()
 
+    # stdout for CLI users
+    if opt.verbose:
+        logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    else:
+        logging.basicConfig(level=logging.WARNING)
+
     # overwrite model if init_model is called directly
     opt.model = model
+
+    # logging
+    msg = f"Initializing Cosmic-CoNN CR detection {opt.model} model...\n"
+    logging.info(msg)
+
+    for k, v in opt.__dict__.items():
+        logging.debug(f"{k}: {v}")
 
     # model path
     if opt.model == "ground_imaging":
@@ -57,16 +70,18 @@ def init_model(model, opt=None):
         opt.load_model = opt.model
 
     else:
-        raise ValueError(
-            "-m [ground_imaging | NRES | HST_ACS_WFC | model_file(.pth/.tar)]"
-        )
+        msg = "-m [ground_imaging | NRES | HST_ACS_WFC | model_file(.pth/.tar)]"
+        logging.error(msg)
+        raise ValueError(msg)
 
     # init model instance
     cr_model = Cosmic_CoNN()
     cr_model.initialize(opt)
     cr_model.eval()
 
-    print(f"{opt.model} model initialized.\n")
+    msg = f"{opt.model} model initialized.\n"
+    logging.info(msg)
+
     return cr_model
 
 
@@ -86,29 +101,29 @@ def detect_FITS(model):
 
             try:
                 if ext != 'SCI':
-                    print(f"Reading data from hdul[{ext}]")
+                    msg = f"Reading data from hdul[{ext}]"
                     # if user asigned extension, try it first
                     image = hdul[ext].data.astype("float32")
 
                 elif hdul[0].data is not None:
-                    print("Reading data from hdul[0], "
-                          "to specify extension name: -e SCI.")
+                    msg = "Reading data from hdul[0]"
                     image = hdul[0].data.astype("float32")
 
                 elif hdul[1].data is not None:
-                    print("Reading data from hdul[1], "
-                          "to specify extension name: -e SCI.")
+                    msg = "Reading data from hdul[1]"
                     image = hdul[1].data.astype("float32")
 
                 else:
-                    print(f"Reading data from hdul[{ext}], "
-                          "to specify extension name: -e SCI.")
+                    msg = f"Reading data from hdul[{ext}]"
                     image = hdul[ext].data.astype("float32")
 
+                logging.info(msg)
+
             except:
-                raise ValueError(
-                    f"No valid data found in extention 0, 1 or {ext}, "
-                    "to specify extension name: -e SCI.")
+                msg = f"No valid data found in extention 0, 1 or {ext}, \
+                    to specify extension name: -e SCI."
+                logging.error(msg)
+                raise ValueError(msg)
 
             # detection
             cr_probability = model.detect_cr(image, ret_numpy=True)
@@ -124,13 +139,13 @@ def detect_FITS(model):
             hdul.writeto(out_name, overwrite=True)
 
             toc = time.perf_counter()
-            print(f"Detection of a {image.shape} image took"
-                  f"{round(toc-tic, 2)}s.\n"
-                  f"Result saved as {os.path.basename(out_name)}\n")
+            msg = f"Detection of a {image.shape} image took {round(toc-tic, 2)}s."
+            msg1 = f"Result saved as {os.path.basename(out_name)}"
+            logging.info(msg)
+            logging.info(msg1)
 
-    print(
-        f"\nDone. The CR probability map is appended to a new "
-        f"FITS copy and saved in {PREDICT_DIR}")
+    msg = f"\nDone. The CR probability map is appended to a new FITS copy and saved in {PREDICT_DIR}"
+    logging.info(msg)
 
     if os.path.exists(TEMP_DIR):
         shutil.rmtree(TEMP_DIR)
@@ -146,6 +161,10 @@ def detect_image(cr_model, image, ret_numpy=True):
 def CLI_entry_point():
     # entry point form CLI detection or web app
     opt = console_arguments()
+
+    # print out logs in CLI, otherwise only logging
+    opt.verbose = True
+
     cr_model = init_model(opt.model, opt)
 
     if opt.app:
