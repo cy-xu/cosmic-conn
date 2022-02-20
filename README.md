@@ -5,6 +5,12 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2106.14922-b31b1b.svg?style=flat)](https://arxiv.org/abs/2106.14922) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034763.svg)](https://doi.org/10.5281/zenodo.5034763) [![PyPI version](https://badge.fury.io/py/cosmic-conn.svg)](https://badge.fury.io/py/cosmic-conn) [![readthedocs](https://readthedocs.org/projects/cosmic-conn/badge/?version=latest)](https://cosmic-conn.readthedocs.io) [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
 
+## [New] Demo video for interactive CR mask visualization and editing  
+
+<a href="https://www.youtube.com/watch?v=bdqmwcQeKyc
+" target="_blank"><img src="https://cosmic-conn.readthedocs.io/en/latest/_images/cosmic_conn_web_app_interface.png" 
+alt="web-based CR detector interface" width="600"/></a>
+
 ## About 
 ![Cosmic-CoNN overview](https://cosmic-conn.readthedocs.io/en/latest/_images/Cosmic-CoNN_overview.png)
 
@@ -44,26 +50,31 @@ Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep.
 
 We recommend installing Cosmic-CoNN in a new virtual environment, see the step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html). To get a ~10x speed-up with GPU acceleration, see [Install for a CUDA-enabled GPU](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
 
-```console
+```bash
   # basic install for CR detection or library integration
   $ pip install cosmic-conn
 
-  # include Flask for the web app interface
+  # include Flask to use the interactive tool
   $ pip install cosmic-conn[webapp] 
 
   # install all dependencies for development
   $ pip install cosmic-conn[develop] 
 ```
 
-## Command line interface
+## Command-line interface
 
-After installation, you can start CR detection in FITS files right from the terminal:
+After installation, you can batch process FITS files for CR detection from the terminal:
 
-```console
+```bash
   $ cosmic-conn -m ground_imaging -e SCI -i input_dir
 ```
 
-This command launches a generic `gorund_imaging` model to detect cosmic rays. It reads data from the SCI extension in a FITS file and processes all files in the input_dir. We also provide the `NRES` model for CR detection in spectroscopic data and the `HST_ACS_WFC` model for Hubble ACS/WFC imaging data. You could also find more Hubble Space Telescope CR detection and inpainting models trained by [deepCR](https://github.com/profjsb/deepCR).
+``-m`` or ``--model`` specifies the CR detection model. `"ground_imaging"` is loaded by default,  `"NRES"` is the spectroscopic model for LCO NRES instruments. You can also download a Hubble Space Telescope model trained by [deepCR](https://github.com/profjsb/deepCR) and pass in the model's path.
+
+``-i`` or ``--input`` specifies the input file or directory. 
+
+``-e`` or ``--ext`` defines which FITS extension to read image data, by default we read the first valid image array in the order of `hdul[0] -> hdul[1] -> hdul['SCI']` unless user specify an extension name.
+
 
 See [documentation](https://cosmic-conn.readthedocs.io/en/latest/source/user_guide.html) for the complete user guide.
 
@@ -86,15 +97,19 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
 
 ```
 
-## Web app
+## Interactive CR mask visualization and editing
 
-```console
+```bash
   $ cosmic-conn -a ground_imaging -e SCI
 ```
 
-The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask editing and is especially useful to find the suitable thresholds for different types of observations:
+The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask visualization and editing and is especially useful to find the suitable thresholds for different types of observations. We are working on addding the paintbrush tool for pixel-level manual editing.
 
-<img src="https://cosmic-conn.readthedocs.io/en/latest/_images/cosmic_conn_web_app_interface.png" alt="web-based CR detector interface" width="600"/>
+<!-- <img src="https://cosmic-conn.readthedocs.io/en/latest/_images/cosmic_conn_web_app_interface.png" alt="web-based CR detector interface" width="600"/> -->
+
+<a href="https://www.youtube.com/watch?v=bdqmwcQeKyc
+" target="_blank"><img src="https://cosmic-conn.readthedocs.io/en/latest/_images/cosmic_conn_web_app_interface.png" 
+alt="web-based CR detector interface" width="400" /></a>
 
 The Cosmic-CoNN web app interface.
 

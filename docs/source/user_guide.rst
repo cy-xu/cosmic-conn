@@ -17,7 +17,7 @@ By default, the console commands will load the generic "ground_imaging" model to
 
 **Specifying the input directory**
   
-Batch processing multiple FITS file by specifying the input directory with ``-i`` or ``--input``::
+Batch processing multiple FITS files by specifying the input directory with ``-i`` or ``--input``::
 
   $ cosmic-conn -i input_dir
   # to process a single file::
@@ -25,7 +25,7 @@ Batch processing multiple FITS file by specifying the input directory with ``-i`
 
 **Specifying FITS extension for data**
   
-Use ``-e`` or ``--ext`` to define which extenion to read data from, by default We read the first valid image array in the order of hdul[0] -> hdul[1] -> hdul['SCI'] unless user provided a extion name to overrid::
+Use ``-e`` or ``--ext`` to define which extension to read data from, by default we read the first valid image array in the order of hdul[0] -> hdul[1] -> hdul['SCI'] unless user provided a extension name to override::
 
   $ cosmic-conn -i input_dir -e SPECTRUM
 

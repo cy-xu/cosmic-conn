@@ -37,8 +37,6 @@ class Cosmic_CoNN(nn.Module):
         return "Unsupervised_CR"
 
     def initialize(self, opt):
-        # torch.cuda.set_device('cuda')
-        # torch.device('cuda')
         self.opt = opt
         self.best_name = "epoch_0"
         self.last_best_model = None
@@ -221,9 +219,6 @@ class Cosmic_CoNN(nn.Module):
 
         for stamp in stamp_sizes:
             try:
-                msg = f"Slicing image to {stamp}x{stamp} stamps..."
-                logging.info(msg)
-
                 torch.cuda.empty_cache()
 
                 mask = clean_large(
