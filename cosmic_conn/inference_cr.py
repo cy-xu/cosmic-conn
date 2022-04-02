@@ -27,7 +27,7 @@ cudnn.benchmark = True
 
 PREDICT_DIR = "cosmic_conn_output"
 TEMP_DIR = "instance_temp_storage"
-MODEL_VERSON = "0.2.8"
+MODEL_VERSON = "0.3.0"
 
 
 def init_model(model, opt=None):

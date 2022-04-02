@@ -2,6 +2,12 @@
 History
 =======
 
+0.3.0 (2022-04-02)
+    - added scripts to reproduce ablation study experiments
+    - zenodo archive
+
+------------------
+
 0.2.8 (2022-01-04)
     - added `-c` option to CLI to specify crop size for stamp detection
     - stop using memory_check(), which is not robust on server nodes
