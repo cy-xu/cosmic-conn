@@ -23,10 +23,24 @@ const GRAYSCALE_COLOR_MAP_RANGE_CONTROL_ID = 'black-white-map-control'
 const BLACK_VALUE_INPUT_ID = 'black-value-input'
 const WHITE_VALUE_INPUT_ID = 'white-value-input'
 
+const DILATION_WHITE_PEN_ID = 'dilation-white-pen'
+const DILATION_BLACK_PEN_ID = 'dilation-black-pen'
+
+// State Machines
+const DilationPen = {
+    PEN_NONE: 0,
+    PEN_WHITE: 1,
+    PEN_BLACK: 2
+}
+
 class ControlPanel {
     constructor(controller) {
         this.context = controller
 
+        // Properties
+        this.dilation_pen_selected = DilationPen.PEN_NONE;
+        
+        // Hook to the DOM components
         this.scale_select_menu = document.getElementById(SCALE_SELECT_MENU_ID)
         this.scale_current_selected = document.getElementById(SCALE_CURRENT_METHOD_LABEL)
         this.clamp_min_input = document.getElementById(GRAYSCALE_CLAMP_MIN_INPUT)
@@ -44,6 +58,9 @@ class ControlPanel {
         this.black_value_input = document.getElementById(BLACK_VALUE_INPUT_ID)
         this.white_value_input = document.getElementById(WHITE_VALUE_INPUT_ID)
 
+        this.dilation_white_pen = document.getElementById(DILATION_WHITE_PEN_ID)
+        this.dilation_black_pen = document.getElementById(DILATION_BLACK_PEN_ID)
+    
         this.#hookup_callbacks()
 
         this.reset_control_parameters()
@@ -91,6 +108,10 @@ class ControlPanel {
         return threshold_value
     }
 
+    get_dilation_pen() {
+        return this.dilation_pen_selected;
+    }
+
     #hookup_callbacks() {
         $(this.scale_select_menu).find('.' + SCALE_SELECT_MENU_ITEM_CLASS).click((event) => {
             this.#scale_method_selected_callback(event)
@@ -130,6 +151,14 @@ class ControlPanel {
 
         $(this.threshold_minus_button).click((event) => {
             this.#threshold_minus_button_clicked_callback(event)
+        })
+
+        $(this.dilation_white_pen).click((event) => {
+            this.#dilation_pen_clicked_callback(event)
+        })
+
+        $(this.dilation_black_pen).click((event) => {
+            this.#dilation_pen_clicked_callback(event)
         })
     }
 
@@ -227,5 +256,39 @@ class ControlPanel {
         } catch {
             console.log("Failed. Image not loaded.")
         }
+    }
+
+    #dilation_pen_clicked_callback(event) {
+        let dilation_pen = event.target
+        let pen_clicked = dilation_pen.id
+
+        // Fetch the clicked state
+        if (dilation_pen.id == DILATION_BLACK_PEN_ID) {
+            pen_clicked = DilationPen.PEN_BLACK
+        } else if (dilation_pen.id == DILATION_WHITE_PEN_ID) {
+            pen_clicked = DilationPen.PEN_WHITE
+        } else {
+            console.log("Invalid pen selection. Selected id: ", dilation_pen.id)
+            return
+        }
+
+        // Set the state
+        this.dilation_pen_selected = (pen_clicked != this.dilation_pen_selected) ? pen_clicked : DilationPen.PEN_NONE;
+        
+        // Clear and reapply the highlight on UI
+        const PEN_SELECT_CLASS = "pen-selected"
+        this.dilation_white_pen.classList.remove(PEN_SELECT_CLASS)
+        this.dilation_black_pen.classList.remove(PEN_SELECT_CLASS)
+
+        switch (this.dilation_pen_selected) {
+            case DilationPen.PEN_WHITE:
+                this.dilation_white_pen.classList.add(PEN_SELECT_CLASS);
+                break;
+            case DilationPen.PEN_BLACK:
+                this.dilation_black_pen.classList.add(PEN_SELECT_CLASS);
+                break;
+        }
+        
+        dilation_pen.blur()
     }
 }
