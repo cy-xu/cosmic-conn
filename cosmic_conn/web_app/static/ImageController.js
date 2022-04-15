@@ -13,10 +13,16 @@ const MaskPipeStage = {
     BINARY_STAGE: 1,
     DILATION_STAGE: 2,
     RENDER_STAGE: 3,
+    PIXEL_STAGE: 4
 }
 
 class ImageController {
     constructor() {
+        // Dilation Edited Pixels
+        this.dilation_white_pixels = new Array()
+        this.dilation_black_pixels = new Array()
+        
+        // Image Models
         // stage 1 image model
         this.raw_image_model = new RawImageModel()
         // - frame models
@@ -82,6 +88,9 @@ class ImageController {
     }
 
     refresh_mask_view(start_stage) {
+        let width = 0
+        let height = 0
+        let rval = []
         switch (start_stage) {
             case MaskPipeStage.RAW_STAGE:
             case MaskPipeStage.BINARY_STAGE:
@@ -92,13 +101,21 @@ class ImageController {
             case MaskPipeStage.DILATION_STAGE:
                 // TODO: Need to refactor the canvas code
                 let binary_mask = this.binary_mask_model.binary_mask
-                let [width, height] = this.raw_image_model.image_dimension
+                rval = this.raw_image_model.image_dimension
+                width = rval[0]
+                height = rval[1]
                 this.image_view.set_mask_image_pixels_from_grayscale_array(
                     width, height, binary_mask.tolist())
-
                 let dilation_value = this.image_control_panel.get_dilation_value()
                 if (dilation_value != 0)
                     this.image_view.post_process_mask_image_dilation(dilation_value)
+            case MaskPipeStage.PIXEL_STAGE:
+                rval = this.raw_image_model.image_dimension
+                width = rval[0]
+                height = rval[1]
+                this.image_view.set_mask_image_edited_dilation_pixels(width, height,
+                    this.dilation_white_pixels, this.dilation_black_pixels)
+
 
         }
     }

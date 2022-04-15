@@ -260,6 +260,37 @@ class ImagePanelView {
         this.mask_canvas = this.#construct_canvas_from_grayscale_array(width, height, grayscale_array)
     }
 
+    set_mask_image_edited_dilation_pixels(width, height, white_pixels, black_pixels) {
+        // pxiels are expeceted to be array of Pixels
+        let img_data = new ImageData(1, 1)
+        let white_px_count = white_pixels.length
+        let black_px_count = black_pixels.length
+        console.log("Black length: ", black_pixels)
+        console.log("White length: ", white_pixels)
+        let context = this.mask_canvas.getContext("2d")
+        for (let i = 0; i < white_px_count; i++) {
+            let px = white_pixels[i]
+            if (!px.in_range(width, height))
+                continue
+            img_data.data[0] = 255;
+            img_data.data[1] = 255;
+            img_data.data[2] = 255;
+            img_data.data[3] = 255;
+            context.putImageData(img_data, px.x, px.y)
+        }
+
+        for (let i = 0; i < black_px_count; i++) {
+            let px = black_pixels[i]
+            if (!px.in_range(width, height))
+                continue
+            img_data.data[0] = 0;
+            img_data.data[1] = 0;
+            img_data.data[2] = 0;
+            img_data.data[3] = 0;
+            context.putImageData(img_data, px.x, px.y)
+        }
+    }
+
     #construct_canvas_from_grayscale_array(width, height, grayscale_array) {
         let canvas = document.createElement('canvas')
         canvas.setAttribute('width', width)

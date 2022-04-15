@@ -153,3 +153,19 @@ class BinaryMaskModel {
         return this.binary_mask_array
     }
 }
+
+class Pixel {
+    constructor(x, y) {
+        this.x_coord = x
+        this.y_coord = y
+    }
+    
+    in_range(width, height) {
+        let x_in_range = this.x_coord >= 0 && this.x_coord < width;
+        let y_in_range = this.y_coord >= 0 && this.y_coord < height;
+        return x_in_range && y_in_range
+    }
+
+    get x() {return this.x_coord}
+    get y() {return this.y_coord}
+}
