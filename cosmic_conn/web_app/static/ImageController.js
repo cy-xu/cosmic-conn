@@ -16,11 +16,52 @@ const MaskPipeStage = {
     PIXEL_STAGE: 4
 }
 
+class PixelRecord {
+    constructor() {
+        this.record = {}
+    }
+
+    #tokey(pixel) {
+        return `${pixel.x},${pixel.y}`
+    }
+    
+    exist(pixel) {
+        let key = this.#tokey(pixel)
+        return key in this.record
+    }
+
+    add(pixel) {
+        if (this.exist(pixel))
+            return
+        let key = this.#tokey(pixel)
+        this.record[key] = pixel
+    }
+
+    remove(pixel) {
+        if (!this.exist(pixel))
+            return
+        let key = this.#tokey(pixel)
+        delete this.record[key]
+    }
+
+    tolist() {
+        return Object.values(this.record)
+    }
+
+    clear() {
+        for (const key in this.record) {
+            delete this.record[key]
+        }
+    }
+}
+
 class ImageController {
     constructor() {
         // Dilation Edited Pixels
-        this.dilation_white_pixels = new Array()
-        this.dilation_black_pixels = new Array()
+        // this.dilation_white_pixels = new Array()
+        // this.dilation_black_pixels = new Array()
+        this.dilation_white_pr = new PixelRecord()
+        this.dilation_black_pr = new PixelRecord()
         
         // Image Models
         // stage 1 image model
@@ -114,7 +155,7 @@ class ImageController {
                 width = rval[0]
                 height = rval[1]
                 this.image_view.set_mask_image_edited_dilation_pixels(width, height,
-                    this.dilation_white_pixels, this.dilation_black_pixels)
+                    this.dilation_white_pr.tolist(), this.dilation_black_pr.tolist())
 
 
         }
@@ -133,6 +174,19 @@ class ImageController {
 
     refresh_zoom_images() {
         this.image_view.refresh_zoomed_images()
+    }
+
+    // Getters
+    get control_panel() {
+        return this.image_control_panel
+    }
+    
+    get dilation_white_px_record() {
+        return this.dilation_white_pr
+    }
+
+    get dilation_black_px_record() {
+        return this.dilation_black_pr
     }
 }
 

@@ -25,6 +25,7 @@ const WHITE_VALUE_INPUT_ID = 'white-value-input'
 
 const DILATION_WHITE_PEN_ID = 'dilation-white-pen'
 const DILATION_BLACK_PEN_ID = 'dilation-black-pen'
+const DILATION_CLEAR_BUTTON_ID = 'dilation-clear-button'
 
 // State Machines
 const DilationPen = {
@@ -60,6 +61,7 @@ class ControlPanel {
 
         this.dilation_white_pen = document.getElementById(DILATION_WHITE_PEN_ID)
         this.dilation_black_pen = document.getElementById(DILATION_BLACK_PEN_ID)
+        this.dilation_clear_edits_button = document.getElementById(DILATION_CLEAR_BUTTON_ID)
     
         this.#hookup_callbacks()
 
@@ -160,6 +162,10 @@ class ControlPanel {
         $(this.dilation_black_pen).click((event) => {
             this.#dilation_pen_clicked_callback(event)
         })
+
+        $(this.dilation_clear_edits_button).click((event) => {
+            this.#dilation_clear_edits_button_clicked_callback(event)
+        })
     }
 
     // callbacks
@@ -230,6 +236,23 @@ class ControlPanel {
             this.context.refresh_zoom_images()
         } catch (e) {
             console.log('Refresh Failed. Details: ', e)
+        }
+    }
+
+    #dilation_clear_edits_button_clicked_callback(event) {
+        this.context.dilation_white_px_record.clear()
+        this.context.dilation_black_px_record.clear()
+
+        /* TODO: currently doesn't support update from the PIXEL_STAGE 
+        * because the pixel modifications are on the image data directly.
+        * saving the dilation result before updating the the canvas image data
+        * can allow the update from the PIXEL_STAGE for speed optimization
+        */
+        try {
+            this.context.refresh_mask_view(MaskPipeStage.DILATION_STAGE)
+            this.context.refresh_zoom_images()
+        } catch {
+            console.log("Failed. Image not loaded.")
         }
     }
 
