@@ -224,10 +224,12 @@ class ImagePanelView {
             return
         
         try {
+            sample_x = Math.floor(sample_x)
+            sample_y = Math.floor(sample_y)
             let gray_value = this.context.raw_image_model.gray_value_at(sample_x, sample_y)
             let prob_value = this.context.raw_image_model.mask_value_at(sample_x, sample_y)
-            let image_output = `pixel: (${sample_x.toFixed(2)}, ${sample_y.toFixed(2)}) ` + `gray value: ${gray_value.toFixed(5)}`
-            let mask_output = `pixel: (${sample_x.toFixed(2)}, ${sample_y.toFixed(2)}) ` + `confidence: ${prob_value.toFixed(5) * 100}%`  
+            let image_output = `pixel: (${sample_x}, ${sample_y}) ` + `value: ${gray_value.toFixed(5)}`
+            let mask_output = `pixel: (${sample_x}, ${sample_y}) ` + `confidence: ${(prob_value * 100).toFixed(3)}%`  
             
             $('#' + GRAY_VALUE_INDICATOR_ID).text(image_output)
             $('#' + MASK_CONFIDENCE_INDICATOR_ID).text(mask_output)
