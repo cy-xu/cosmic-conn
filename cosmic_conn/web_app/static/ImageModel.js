@@ -26,14 +26,20 @@ class RawImageModel {
     update_mask_image(mask_payload) {
         let width = mask_payload.image_width
         let height = mask_payload.image_height
-        let grayscale_array = mask_payload.image_grayscale_array
-        this.mask_image = new ImageDataWrapper(grayscale_array, width, height)
+        let mask_array = mask_payload.image_grayscale_array
+        this.mask_image = new ImageDataWrapper(mask_array, width, height)
     }
 
-    value_at(x, y) {
+    gray_value_at(x, y) {
         let w = this.frame_image.width
         let index = w * Math.floor(y) + Math.floor(x)
         return this.frame_image.image_array.get(index)
+    }
+
+    mask_value_at(x, y) {
+        let w = this.frame_image.width
+        let index = w * Math.floor(y) + Math.floor(x)
+        return this.mask_image.image_array.get(index)
     }
 
     set_zscale(float_list_payload) {

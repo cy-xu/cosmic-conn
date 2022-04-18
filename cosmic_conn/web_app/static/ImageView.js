@@ -3,6 +3,8 @@ const ZOOM_WINDOW_ID = 'zoom-window'
 const ZOOMED_FRAME_IMAGE_ID = 'frame-zoom-img'
 const ZOOMED_MASK_IMAGE_ID = 'mask-zoom-img'
 const PIXEL_VALUE_INDICATOR_CLASS = 'pixel-value-indicator'
+const GRAY_VALUE_INDICATOR_ID = 'gray-value-indicator'
+const MASK_CONFIDENCE_INDICATOR_ID = 'mask-confidence-indicator'
 
 const ZOOMED_WINDOW_MINIMUM_PIXEL = 5
 const ZOOMED_WINDOW_MAXIMUM_PIXEL = 500
@@ -222,9 +224,13 @@ class ImagePanelView {
             return
         
         try {
-            let value = this.context.raw_image_model.value_at(sample_x, sample_y)
-            let output = `pixel: (${sample_x.toFixed(2)}, ${sample_y.toFixed(2)}) ` + `value: ${value.toFixed(5)}` 
-            $('.' + PIXEL_VALUE_INDICATOR_CLASS).text(output)
+            let gray_value = this.context.raw_image_model.gray_value_at(sample_x, sample_y)
+            let prob_value = this.context.raw_image_model.mask_value_at(sample_x, sample_y)
+            let image_output = `pixel: (${sample_x.toFixed(2)}, ${sample_y.toFixed(2)}) ` + `gray value: ${gray_value.toFixed(5)}`
+            let mask_output = `pixel: (${sample_x.toFixed(2)}, ${sample_y.toFixed(2)}) ` + `confidence: ${prob_value.toFixed(5) * 100}%`  
+            
+            $('#' + GRAY_VALUE_INDICATOR_ID).text(image_output)
+            $('#' + MASK_CONFIDENCE_INDICATOR_ID).text(mask_output)
         }
         catch {}
     }
