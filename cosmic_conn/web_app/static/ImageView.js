@@ -15,8 +15,8 @@ const ZOOMED_WINDOW_OUTLINE_BLUE = 180
 
 const ZOOMED_WINDOW_SLOTDOWN_THRESHOLD = 0.35
 
-const DILATION_WHITE_PEN_COLOR = {'r': 220, 'g': 215, 'b':255, 'a': 255}
-const DILATION_BLACK_PEN_COLOR = {'r': 45,  'g': 0,  'b':100,  'a': 255}
+const DILATION_WHITE_PEN_COLOR = {'r': 181, 'g': 231, 'b':160, 'a': 255}
+const DILATION_BLACK_PEN_COLOR = {'r': 236, 'g': 161, 'b':166, 'a': 255}
 
 
 class ZoomWindow {
@@ -54,7 +54,11 @@ class ZoomWindow {
         let size = this.current_window_size
         let range = this.largest_window_size - this.smallest_window_size
         let bottom = size - this.smallest_window_size;
-        size += this.window_size_change_step * ((bottom < range * ZOOMED_WINDOW_SLOTDOWN_THRESHOLD) ? (bottom / (range * ZOOMED_WINDOW_SLOTDOWN_THRESHOLD)) : 1);
+        // |        |               |
+        // min      bottom          max
+        let th = ZOOMED_WINDOW_SLOTDOWN_THRESHOLD
+        let delta = this.window_size_change_step * ((bottom < range * th) ? (bottom / (range * th)) : 1);
+        size += delta == 0 ? 1 : Math.ceil(delta)
         this.current_window_size = this.#regulate_window_size(size)
         this.#update_window_position(prev_center_x , prev_center_y)
     }
@@ -63,8 +67,12 @@ class ZoomWindow {
         let [prev_center_x, prev_center_y] = this.get_window_center()
         let size = this.current_window_size
         let range = this.largest_window_size - this.smallest_window_size
-        let bottom = size - this.smallest_window_size;
-        size -= this.window_size_change_step * ((bottom < range * ZOOMED_WINDOW_SLOTDOWN_THRESHOLD) ? (bottom / (range * ZOOMED_WINDOW_SLOTDOWN_THRESHOLD)) : 1);
+        let bottom = size - this.smallest_window_size
+        // |        |               |
+        // min      bottom          max
+        let th = ZOOMED_WINDOW_SLOTDOWN_THRESHOLD
+        let delta = this.window_size_change_step * ((bottom < range * th) ? (bottom / (range * th)) : 1);
+        size -= delta == 0 ? 1 : Math.ceil(delta)
         this.current_window_size = this.#regulate_window_size(size)
         this.#update_window_position(prev_center_x , prev_center_y)
     }
