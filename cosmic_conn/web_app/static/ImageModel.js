@@ -26,14 +26,20 @@ class RawImageModel {
     update_mask_image(mask_payload) {
         let width = mask_payload.image_width
         let height = mask_payload.image_height
-        let grayscale_array = mask_payload.image_grayscale_array
-        this.mask_image = new ImageDataWrapper(grayscale_array, width, height)
+        let mask_array = mask_payload.image_grayscale_array
+        this.mask_image = new ImageDataWrapper(mask_array, width, height)
     }
 
-    value_at(x, y) {
+    gray_value_at(x, y) {
         let w = this.frame_image.width
         let index = w * Math.floor(y) + Math.floor(x)
         return this.frame_image.image_array.get(index)
+    }
+
+    mask_value_at(x, y) {
+        let w = this.frame_image.width
+        let index = w * Math.floor(y) + Math.floor(x)
+        return this.mask_image.image_array.get(index)
     }
 
     set_zscale(float_list_payload) {
@@ -152,4 +158,20 @@ class BinaryMaskModel {
     get binary_mask() {
         return this.binary_mask_array
     }
+}
+
+class Pixel {
+    constructor(x, y) {
+        this.x_coord = x
+        this.y_coord = y
+    }
+    
+    in_range(width, height) {
+        let x_in_range = this.x_coord >= 0 && this.x_coord < width;
+        let y_in_range = this.y_coord >= 0 && this.y_coord < height;
+        return x_in_range && y_in_range
+    }
+
+    get x() {return this.x_coord}
+    get y() {return this.y_coord}
 }

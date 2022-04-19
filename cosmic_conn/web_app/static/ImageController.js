@@ -13,10 +13,57 @@ const MaskPipeStage = {
     BINARY_STAGE: 1,
     DILATION_STAGE: 2,
     RENDER_STAGE: 3,
+    PIXEL_STAGE: 4
+}
+
+class PixelRecord {
+    constructor() {
+        this.record = {}
+    }
+
+    #tokey(pixel) {
+        return `${pixel.x},${pixel.y}`
+    }
+    
+    exist(pixel) {
+        let key = this.#tokey(pixel)
+        return key in this.record
+    }
+
+    add(pixel) {
+        if (this.exist(pixel))
+            return
+        let key = this.#tokey(pixel)
+        this.record[key] = pixel
+    }
+
+    remove(pixel) {
+        if (!this.exist(pixel))
+            return
+        let key = this.#tokey(pixel)
+        delete this.record[key]
+    }
+
+    tolist() {
+        return Object.values(this.record)
+    }
+
+    clear() {
+        for (const key in this.record) {
+            delete this.record[key]
+        }
+    }
 }
 
 class ImageController {
     constructor() {
+        // Dilation Edited Pixels
+        // this.dilation_white_pixels = new Array()
+        // this.dilation_black_pixels = new Array()
+        this.dilation_white_pr = new PixelRecord()
+        this.dilation_black_pr = new PixelRecord()
+        
+        // Image Models
         // stage 1 image model
         this.raw_image_model = new RawImageModel()
         // - frame models
@@ -82,6 +129,9 @@ class ImageController {
     }
 
     refresh_mask_view(start_stage) {
+        let width = 0
+        let height = 0
+        let rval = []
         switch (start_stage) {
             case MaskPipeStage.RAW_STAGE:
             case MaskPipeStage.BINARY_STAGE:
@@ -92,13 +142,21 @@ class ImageController {
             case MaskPipeStage.DILATION_STAGE:
                 // TODO: Need to refactor the canvas code
                 let binary_mask = this.binary_mask_model.binary_mask
-                let [width, height] = this.raw_image_model.image_dimension
+                rval = this.raw_image_model.image_dimension
+                width = rval[0]
+                height = rval[1]
                 this.image_view.set_mask_image_pixels_from_grayscale_array(
                     width, height, binary_mask.tolist())
-
                 let dilation_value = this.image_control_panel.get_dilation_value()
                 if (dilation_value != 0)
                     this.image_view.post_process_mask_image_dilation(dilation_value)
+            case MaskPipeStage.PIXEL_STAGE:
+                rval = this.raw_image_model.image_dimension
+                width = rval[0]
+                height = rval[1]
+                this.image_view.set_mask_image_edited_dilation_pixels(width, height,
+                    this.dilation_white_pr.tolist(), this.dilation_black_pr.tolist())
+
 
         }
     }
@@ -116,6 +174,19 @@ class ImageController {
 
     refresh_zoom_images() {
         this.image_view.refresh_zoomed_images()
+    }
+
+    // Getters
+    get control_panel() {
+        return this.image_control_panel
+    }
+    
+    get dilation_white_px_record() {
+        return this.dilation_white_pr
+    }
+
+    get dilation_black_px_record() {
+        return this.dilation_black_pr
     }
 }
 
