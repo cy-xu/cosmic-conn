@@ -2,6 +2,12 @@
 History
 =======
 
+0.4.0 (2022-04-18)
+    - added pencil tool for pixel-level manual editing on the CR/segmentation mask
+    - update zenodo archive
+
+------------------
+
 0.3.0 (2022-04-02)
     - added scripts to reproduce ablation study experiments
     - zenodo archive
