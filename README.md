@@ -1,15 +1,10 @@
-# Cosmic-CoNN
-## A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
-
-## [Github](https://github.com/cy-xu/cosmic-conn) • [Documentation](https://cosmic-conn.readthedocs.io/) • [PyPI Release](https://pypi.org/project/cosmic-conn/) • [LCO CR Dataset](https://zenodo.org/record/5034763) • [Publication](https://github.com/cy-xu/cosmic-conn#publication)
+# Cosmic-CoNN: A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit
 
 [![arXiv](https://img.shields.io/badge/arXiv-2106.14922-b31b1b.svg?style=flat)](https://arxiv.org/abs/2106.14922) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5034763.svg)](https://doi.org/10.5281/zenodo.5034763) [![PyPI version](https://badge.fury.io/py/cosmic-conn.svg)](https://badge.fury.io/py/cosmic-conn) [![readthedocs](https://readthedocs.org/projects/cosmic-conn/badge/?version=latest)](https://cosmic-conn.readthedocs.io) [![astropy](http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat)](http://www.astropy.org/) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg?style=flat-square)](https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3))
 
-## [New] Demo video for interactive CR mask visualization and editing  
+## [Documentation](https://cosmic-conn.readthedocs.io/) • [PyPI Release](https://pypi.org/project/cosmic-conn/) • [LCO CR Dataset](https://zenodo.org/record/5034763) • [Publications](https://github.com/cy-xu/cosmic-conn#publications)
 
-<a href="https://www.youtube.com/watch?v=bdqmwcQeKyc
-" target="_blank"><img src="https://cosmic-conn.readthedocs.io/en/latest/_images/cosmic_conn_web_app_interface.png" 
-alt="web-based CR detector interface" width="600"/></a>
+### [[New] Demo video for interactive CR mask visualization and editing](https://www.youtube.com/watch?v=bdqmwcQeKyc&ab_channel=CYXu)
 
 ## About 
 ![Cosmic-CoNN overview](https://cosmic-conn.readthedocs.io/en/latest/_images/Cosmic-CoNN_overview.png)
@@ -28,22 +23,52 @@ Visual inspection of Cosmic-CoNNCR detection results. Detecting CRs in a Gemini 
 ![Detection demo on LCO NRES data](https://cosmic-conn.readthedocs.io/en/latest/_images/fig11_nres_result_0034_1.png)
 The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO NRES spectroscopic image. The horizontal bands in the left image are the spectroscopic orders, which are left out of the CR mask.
 
-## Publication
+## Publications
 
 <p>
-<a href="https://arxiv.org/abs/2106.14922"><img style="float: left; padding-right:30px;" src="https://cosmic-conn.readthedocs.io/en/latest/_images/paper_with_shadow.png"  width="220"/></a>
+<!-- <a href="https://arxiv.org/abs/2106.14922"><img style="float: left; padding-right:30px;" src="https://cosmic-conn.readthedocs.io/en/latest/_images/paper_with_shadow.png"  width="220"/></a> -->
 
-This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper:
+This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper: [arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
 
-[arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
+```
+@article{xu2021cosmic,
+  title={Cosmic-CoNN: A Cosmic Ray Detection Deep-Learning Framework, Dataset, and Toolkit},
+  author={Xu, Chengyuan and McCully, Curtis and Dong, Boning and Howell, D Andrew and Sen, Pradeep},
+  journal={arXiv preprint arXiv:2106.14922},
+  year={2021}
+}
+```
 
-Please also cite the LCO CR dataset if you used the Cosmic-CoNN `ground_imaging` model or the data in your research:
+Please also cite the [LCO CR dataset](http://doi.org/10.5281/zenodo.5034763) if you used the Cosmic-CoNN `ground_imaging` model or the data in your research:
+```
+@dataset{xu_chengyuan_2021_5034763,
+  author       = {Xu, Chengyuan and
+                  McCully, Curtis and
+                  Dong, Boning and
+                  Howell, D. Andrew and
+                  Sen, Pradeep},
+  title        = {Cosmic-CoNN LCO CR Dataset},
+  month        = jun,
+  year         = 2021,
+  publisher    = {Zenodo},
+  version      = {0.1.0},
+  doi          = {10.5281/zenodo.5034763},
+  url          = {https://doi.org/10.5281/zenodo.5034763}
+}
+```
 
-Xu, Chengyuan, McCully, Curtis, Dong, Boning, Howell, D. Andrew, & Sen, Pradeep. (2021). Cosmic-CoNN LCO CR Dataset (Version 0.1.0) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.5034763
+[CVPR 2022 Demo] Interactive Segmentation and Visualization for Tiny Objects in Multi-megapixel Images: [arXiv:2204.10356](https://arxiv.org/abs/2204.10356)
+```
+@article{xu2022interactive,
+  title={Interactive Segmentation and Visualization for Tiny Objects in Multi-megapixel Images},
+  author={Xu, Chengyuan and Dong, Boning and Stier, Noah and McCully, Curtis and Howell, D Andrew and Sen, Pradeep and H{\"o}llerer, Tobias},
+  journal={arXiv preprint arXiv:2204.10356},
+  year={2022}
+}
+```
 
 </p>
 
-<br/><br/>
 ## Installation
 
 *We recently added optional dependencies install for pip.*
@@ -55,10 +80,10 @@ We recommend installing Cosmic-CoNN in a new virtual environment, see the step-b
   $ pip install cosmic-conn
 
   # include Flask to use the interactive tool
-  $ pip install cosmic-conn[webapp] 
+  $ pip install "cosmic-conn[webapp]"
 
   # install all dependencies for development
-  $ pip install cosmic-conn[develop] 
+  $ pip install "cosmic-conn[develop]"
 ```
 
 ## Command-line interface
