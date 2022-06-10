@@ -2,6 +2,11 @@
 History
 =======
 
+0.4.1 (2022-06-10)
+    - fix broken preivew images from online service
+
+------------------
+
 0.4.0 (2022-04-18)
     - added pencil tool for pixel-level manual editing on the CR/segmentation mask
     - update zenodo archive
