@@ -67,6 +67,8 @@ Please also cite the [LCO CR dataset](http://doi.org/10.5281/zenodo.5034763) if 
 }
 ```
 
+![interactive_segmentation_cvpr22_poster_v2](https://user-images.githubusercontent.com/24612082/174725216-8df9b89b-d5b2-483d-8cf7-d7c660302aeb.png)
+  
 </p>
 
 ## Installation
