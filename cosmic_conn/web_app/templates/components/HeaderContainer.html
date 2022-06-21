@@ -2,14 +2,9 @@
 <div class="row col-12 px-0 align-items-center">
   <div class="col-md-9" style="width: auto; ">
     <div class="mx-2">
-      <h1 class="">Cosmic-CoNN Web App</h1>
+      <h1 class="">Tiny Objects Interactive Segmentation</h1>
       <p class="my-3" style="line-height:1.7rem; font-size: 1.1rem;">
-        <span class="font-weight-bold">Usage: </span>Start the app with -e EXT to define data's extension, otherwise we
-        read the [0, 1,
-        or SCI].data in the selected FITS. // By default a 0.5 threshold is applied to acquire the binary CR mask. Lower
-        the threshold to include more peripheral CR pixels and apply morphological dilation to enlarge detected CRs. //
-        Predicted CR
-        probability map is appended to a new FITS copy, use the Download button to append the edited binary mask.
+        <span class="font-weight-bold">Usage: </span>To detect cosmic rays (CRs) in large telescope observations, upload a FITS file. Full-image overview is on the right. Largest CRs are shown below. Use the Download button to append the edited mask.
       </p>
 
       <!-- Fits Upload Input Box -->
@@ -20,7 +15,7 @@
             instance, your data is not uploaded)</label>
         </div>
         <div class="input-group-append">
-          <button id="file-upload-btn" class="btn btn-outline-primary" type="button">Detect CR</button>
+          <button id="file-upload-btn" class="btn btn-outline-primary" type="button">Detect</button>
         </div>
         <div class="input-group-append">
           <button id="file-download-btn" class="btn btn-outline-primary" type="button" disabled>Download</button>
