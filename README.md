@@ -23,53 +23,6 @@ Visual inspection of Cosmic-CoNNCR detection results. Detecting CRs in a Gemini 
 ![Detection demo on LCO NRES data](https://cosmic-conn.readthedocs.io/en/latest/_images/fig11_nres_result_0034_1.png)
 The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO NRES spectroscopic image. The horizontal bands in the left image are the spectroscopic orders, which are left out of the CR mask.
 
-## Publications
-
-<p>
-<!-- <a href="https://arxiv.org/abs/2106.14922"><img style="float: left; padding-right:30px;" src="https://cosmic-conn.readthedocs.io/en/latest/_images/paper_with_shadow.png"  width="220"/></a> -->
-
-This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper: [arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
-
-```
-@article{xu2021cosmic,
-  title={Cosmic-CoNN: A Cosmic Ray Detection Deep-Learning Framework, Dataset, and Toolkit},
-  author={Xu, Chengyuan and McCully, Curtis and Dong, Boning and Howell, D Andrew and Sen, Pradeep},
-  journal={arXiv preprint arXiv:2106.14922},
-  year={2021}
-}
-```
-
-Please also cite the [LCO CR dataset](http://doi.org/10.5281/zenodo.5034763) if you used the Cosmic-CoNN `ground_imaging` model or the data in your research:
-```
-@dataset{xu_chengyuan_2021_5034763,
-  author       = {Xu, Chengyuan and
-                  McCully, Curtis and
-                  Dong, Boning and
-                  Howell, D. Andrew and
-                  Sen, Pradeep},
-  title        = {Cosmic-CoNN LCO CR Dataset},
-  month        = jun,
-  year         = 2021,
-  publisher    = {Zenodo},
-  version      = {0.1.0},
-  doi          = {10.5281/zenodo.5034763},
-  url          = {https://doi.org/10.5281/zenodo.5034763}
-}
-```
-
-[CVPR 2022 Demo] Interactive Segmentation and Visualization for Tiny Objects in Multi-megapixel Images: [arXiv:2204.10356](https://arxiv.org/abs/2204.10356)
-```
-@article{xu2022interactive,
-  title={Interactive Segmentation and Visualization for Tiny Objects in Multi-megapixel Images},
-  author={Xu, Chengyuan and Dong, Boning and Stier, Noah and McCully, Curtis and Howell, D Andrew and Sen, Pradeep and H{\"o}llerer, Tobias},
-  journal={arXiv preprint arXiv:2204.10356},
-  year={2022}
-}
-```
-
-![interactive_segmentation_cvpr22_poster_v2](https://user-images.githubusercontent.com/24612082/174725216-8df9b89b-d5b2-483d-8cf7-d7c660302aeb.png)
-  
-</p>
 
 ## Installation
 
@@ -143,6 +96,58 @@ The Cosmic-CoNN web app interface.
 ## Train new models with Cosmic-CoNN
 
 See [documentation](https://cosmic-conn.readthedocs.io/en/latest/source/lco_cr_dataset.html) for the developer guide on using LCO CR dataset, data reduction, and model training.
+
+## Publications
+
+<p>
+<!-- <a href="https://arxiv.org/abs/2106.14922"><img style="float: left; padding-right:30px;" src="https://cosmic-conn.readthedocs.io/en/latest/_images/paper_with_shadow.png"  width="220"/></a> -->
+
+This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper: [arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
+
+```
+@article{xu2021cosmic,
+  title={Cosmic-CoNN: A Cosmic Ray Detection Deep-Learning Framework, Dataset, and Toolkit},
+  author={Xu, Chengyuan and McCully, Curtis and Dong, Boning and Howell, D Andrew and Sen, Pradeep},
+  journal={arXiv preprint arXiv:2106.14922},
+  year={2021}
+}
+```
+
+Please also cite the [LCO CR dataset](http://doi.org/10.5281/zenodo.5034763) if you used the Cosmic-CoNN `ground_imaging` model or the data in your research:
+```
+@dataset{xu_chengyuan_2021_5034763,
+  author       = {Xu, Chengyuan and
+                  McCully, Curtis and
+                  Dong, Boning and
+                  Howell, D. Andrew and
+                  Sen, Pradeep},
+  title        = {Cosmic-CoNN LCO CR Dataset},
+  month        = jun,
+  year         = 2021,
+  publisher    = {Zenodo},
+  version      = {0.1.0},
+  doi          = {10.5281/zenodo.5034763},
+  url          = {https://doi.org/10.5281/zenodo.5034763}
+}
+```
+
+**Interactive Segmentation and Visualization for Tiny Objects in Multi-megapixel Images**  
+[CVPR 2022](https://openaccess.thecvf.com/content/CVPR2022/html/Xu_Interactive_Segmentation_and_Visualization_for_Tiny_Objects_in_Multi-Megapixel_Images_CVPR_2022_paper.html)
+```
+@InProceedings{Xu_2022_CVPR,
+    author    = {Xu, Chengyuan and Dong, Boning and Stier, Noah and McCully, Curtis and Howell, D. Andrew and Sen, Pradeep and H\"ollerer, Tobias},
+    title     = {Interactive Segmentation and Visualization for Tiny Objects in Multi-Megapixel Images},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2022},
+    pages     = {21447-21452}
+}
+```
+
+![interactive_segmentation_cvpr22_poster_v2](https://user-images.githubusercontent.com/24612082/174725216-8df9b89b-d5b2-483d-8cf7-d7c660302aeb.png)
+  
+</p>
+
 
 ## Credits
 
