@@ -80,7 +80,7 @@ It is also easy to integrate Cosmic-CoNN CR detection into your data workflow. L
 ## Interactive CR mask visualization and editing
 
 ```bash
-  $ cosmic-conn -a ground_imaging -e SCI
+  $ cosmic-conn -am ground_imaging -e SCI
 ```
 
 The Cosmic-CoNN web app automatically finds large CRs for close inspection. It supports live CR mask visualization and editing and is especially useful to find the suitable thresholds for different types of observations. We are working on addding the paintbrush tool for pixel-level manual editing.
