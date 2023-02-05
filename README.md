@@ -102,14 +102,21 @@ See [documentation](https://cosmic-conn.readthedocs.io/en/latest/source/lco_cr_d
 <p>
 <!-- <a href="https://arxiv.org/abs/2106.14922"><img style="float: left; padding-right:30px;" src="https://cosmic-conn.readthedocs.io/en/latest/_images/paper_with_shadow.png"  width="220"/></a> -->
 
-This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper: [arXiv:2106.14922](https://arxiv.org/abs/2106.14922), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
+This repository is part of our Cosmic-CoNN research paper. Our methods and a thorough evaluation of models' performance are available in the paper. If you used the Cosmic-CoNN or the LCO CR dataset for your research, please cite our paper: [The Astrophysical Journal](https://iopscience.iop.org/article/10.3847/1538-4357/ac9d91/meta), [NASA ADS](https://ui.adsabs.harvard.edu/abs/2021arXiv210614922X/abstract)
 
 ```
-@article{xu2021cosmic,
-  title={Cosmic-CoNN: A Cosmic Ray Detection Deep-Learning Framework, Dataset, and Toolkit},
-  author={Xu, Chengyuan and McCully, Curtis and Dong, Boning and Howell, D Andrew and Sen, Pradeep},
-  journal={arXiv preprint arXiv:2106.14922},
-  year={2021}
+@article{Xu_2023,
+doi = {10.3847/1538-4357/ac9d91},
+url = {https://dx.doi.org/10.3847/1538-4357/ac9d91},
+year = {2023},
+month = {jan},
+publisher = {The American Astronomical Society},
+volume = {942},
+number = {2},
+pages = {73},
+author = {Chengyuan Xu and Curtis McCully and Boning Dong and D. Andrew Howell and Pradeep Sen},
+title = {Cosmic-CoNN: A Cosmic-Ray Detection Deep-learning Framework, Data Set, and Toolkit},
+journal = {The Astrophysical Journal},
 }
 ```
 
