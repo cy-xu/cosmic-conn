@@ -12,15 +12,13 @@ import time
 import shutil
 import logging
 from tqdm import tqdm
-import pretty_errors
 
 import torch.backends.cudnn as cudnn
 from astropy.io import fits
 
 from cosmic_conn.dl_framework.cosmic_conn import Cosmic_CoNN
 from cosmic_conn.dl_framework.options import ModelOptions
-from cosmic_conn.data_utils import check_trained_models, console_arguments
-from cosmic_conn.data_utils import parse_input
+from cosmic_conn.data_utils import check_trained_models, console_arguments, parse_input
 
 cudnn.enabled = True
 cudnn.benchmark = True
@@ -120,8 +118,7 @@ def detect_FITS(model):
                 logging.info(msg)
 
             except:
-                msg = f"No valid data found in extention 0, 1 or {ext}, \
-                    to specify extension name: -e SCI."
+                msg = f"No valid data found in extention 0, 1 or {ext}, please check correct EXTNAME for the image and specify with: cosmic-conn -e EXTNAME"
                 logging.error(msg)
                 raise ValueError(msg)
 

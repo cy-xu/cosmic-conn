@@ -17,7 +17,8 @@ from cosmic_conn.cr_pipeline.utils_img import (
     subtract_sky,
     erase_boundary_np,
 )
-from cosmic_conn.cr_pipeline.utils_img import sep_source_mask, center_crop_npy
+from cosmic_conn.cr_pipeline.utils_img import center_crop_npy
+from cosmic_conn.cr_pipeline.utils_sep import sep_source_mask
 from cosmic_conn.cr_pipeline.utils_io import (
     hdul_to_array,
     save_fits_with_CR,

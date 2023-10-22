@@ -17,7 +17,6 @@ import torch.optim as optim
 # model import
 from cosmic_conn.dl_framework.utils_ml import (
     clean_large,
-    memory_check,
     modulus_boundary_crop,
     subtract_sky,
     median_weighted_bce,
@@ -26,7 +25,6 @@ from cosmic_conn.dl_framework.utils_ml import (
     remove_nan
 )
 from cosmic_conn.dl_framework.unet import UNet_module
-from cosmic_conn.cr_pipeline.utils_img import save_as_png
 
 
 class Cosmic_CoNN(nn.Module):
@@ -473,6 +471,9 @@ class Cosmic_CoNN(nn.Module):
         return model_path
 
     def get_current_visuals(self, epoch):
+        # some packages are not required for inference
+        from cosmic_conn.cr_pipeline.utils_img import save_as_png
+
         os.makedirs(self.epoch_dir, exist_ok=True)
         root = self.epoch_dir
 

@@ -8,7 +8,6 @@ CY Xu (cxu@ucsb.edu)
 import os
 import argparse
 import glob
-import requests
 import zipfile
 from pathlib import Path
 from cosmic_conn.dl_framework.options import ModelOptions
@@ -23,6 +22,9 @@ def is_fits_file(filename):
     return any(filename.endswith(extension) for extension in EXTENSIONS)
 
 def download_file(url):
+    # only import requests if needed
+    import requests
+
     local_filename = url.split('/')[-1]
     # NOTE the stream=True parameter below
     with requests.get(url, stream=True) as r:

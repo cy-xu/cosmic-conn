@@ -14,18 +14,13 @@ requirements = [
     "torch>=1.6.0",
     "numpy",
     "astropy>=3.0",
-    "reproject", 
-    "sep",
     "scikit-image",
-    "psutil",
-    "pretty-errors",
     "tqdm",
-    "requests",
 ]
 
-extras_require = {    
-    "webapp": ["Flask>=1.1.0", "Flask-APScheduler>=1.12.0"],
-    "develop": ["tensorboard>=2.4.0", "scikit-learn>=0.24.0", "Flask>=1.1.0", "Flask-APScheduler>=1.12.0"],
+extras_require = {
+    "webapp": ["requests", "Flask>=1.1.0", "Flask-APScheduler>=1.12.0"],
+    "develop": ["sep", "reproject", "psutil", "requests", "pretty-errors", "tensorboard>=2.4.0", "scikit-learn>=0.24.0", "Flask>=1.1.0", "Flask-APScheduler>=1.12.0"],
 }
 
 setup_requirements = [
@@ -90,6 +85,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/cy-xu/cosmic-conn",
-    version="0.4.1",
+    version="0.5.0",
     zip_safe=False,
 )

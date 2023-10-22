@@ -2,6 +2,11 @@
 History
 =======
 
+0.5.0 (2023-10-21)
+    - remove development dependencies from inference install
+
+------------------
+
 0.4.1 (2022-06-10)
     - fix broken preivew images from online service
 

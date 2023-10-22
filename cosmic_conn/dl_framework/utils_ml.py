@@ -7,7 +7,6 @@ import math
 import logging
 import datetime
 import random
-import psutil
 import numpy as np
 
 import torch
