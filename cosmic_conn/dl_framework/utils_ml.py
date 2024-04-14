@@ -8,6 +8,7 @@ import logging
 import datetime
 import random
 import numpy as np
+from multiprocessing import Pool
 
 import torch
 import torch.nn as nn
@@ -254,6 +255,89 @@ def erase_boundary_np(ndarray, boundary_width=0, replace_value=0):
             return copy
 
 
+def detect_patch(args):
+    patch, model = args
+
+    pdt = model(patch)
+    pdt = pdt.squeeze().detach()
+
+    return pdt
+
+
+def clean_large_mp(image, model, patch=1024, overlap=0, ret_numpy=False, num_process=4):
+    """
+    This is the multiprocessing version of clean_large
+
+    image: np.ndarray, 2D Input image
+    :return: mask or binary mask; or None if internal call
+    """
+
+    if not isinstance(image, torch.Tensor):
+        image = torch.tensor(image).float()
+
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    image = image.to(device)
+
+    shape = image.shape
+    stride = patch - 2 * overlap
+    hh = math.ceil(shape[0] / stride)
+    ww = math.ceil(shape[1] / stride)
+    mask_full = torch.zeros_like(image)
+
+    # use a crop id to keep track of the patch location
+    patches = []
+    patch_locs = []
+
+    for i in range(hh):
+        for j in range(ww):            
+            # overlapping crop at stride
+            h_start = i * stride
+            w_start = j * stride
+            h_stop = min(h_start + patch, shape[0])
+            w_stop = min(w_start + patch, shape[1])
+
+            crop = image[h_start:h_stop, w_start:w_stop]
+            crop_h, crop_w = crop.shape
+
+            # sky subtraction
+            crop -= crop.median()
+
+            if crop_h < patch or crop_w < patch:
+                crop = modulus_boundary_crop(crop)
+
+            # update crop size
+            crop_h, crop_w = crop.shape
+
+            if 0 in crop.shape:
+                continue
+
+            # expand dimension to fit the model
+            crop = dim_expand(crop)
+            patches.append(crop)
+
+            h_stop_ = h_start + crop_h
+            w_stop_ = w_start + crop_w
+
+            patch_locs.append([h_start, h_stop_, w_start, w_stop_])
+
+    with Pool(processes=num_process) as p:
+        masks = p.map(detect_patch, [(patch, model) for patch in patches])
+
+    # confirm we got the same number of masks as patches
+    assert len(masks) == len(patches)
+
+    # put the masks back to the image
+    for mask in masks:
+        h_start, h_stop, w_start, w_stop = patch_locs.pop(0)
+        mask = mask.squeeze()
+        mask_full[h_start:h_stop, w_start:w_stop] = mask
+
+    if ret_numpy:
+        mask_full = tensor2np(mask_full)
+
+    return mask_full
+
+
 def clean_large(image, model, patch=1024, overlap=0, ret_numpy=False):
     """
         modified from deepCR implementation
@@ -280,7 +364,7 @@ def clean_large(image, model, patch=1024, overlap=0, ret_numpy=False):
     mask = torch.zeros_like(image)
 
     for i in range(hh):
-        for j in range(ww):
+        for j in range(ww):            
             # overlapping crop at stride
             h_start = i * stride
             w_start = j * stride
@@ -302,6 +386,11 @@ def clean_large(image, model, patch=1024, overlap=0, ret_numpy=False):
             # expand dimension to fit the model
             pdt = model(dim_expand(crop))
             pdt = pdt.squeeze()
+            
+            # skip to test time difference
+            # pdt = crop
+            # for an 2k by 2k image, the processing time is about 7 seconds on M2 macbook
+            # if skipping the model inference, the overhead time is about 0.5 seconds
 
             h_pad = min(1, i) * overlap
             w_pad = min(1, j) * overlap

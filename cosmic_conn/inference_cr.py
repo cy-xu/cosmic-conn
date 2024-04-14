@@ -89,13 +89,22 @@ def detect_FITS(model):
     all_fits = parse_input(options.input, PREDICT_DIR)
     ext = model.opt.ext
 
+    # development cdoe: specify crop size like in LCO pipeline
+    # model.opt.crop = 256
+    # model.opt.num_process = 4
+
+    if model.opt.num_process > 1:
+        msg = f"using multiprocessing for model inference with {model.opt.num_process} processes."
+        logging.info(msg)
+
+    time_start = time.perf_counter()
+
     # start batch detection
     for i in tqdm(range(len(all_fits))):
         f = all_fits[i]
 
         with fits.open(f) as hdul:
             image = None
-            tic = time.perf_counter()
 
             try:
                 if ext != 'SCI':
@@ -115,6 +124,7 @@ def detect_FITS(model):
                     msg = f"Reading data from hdul[{ext}]"
                     image = hdul[ext].data.astype("float32")
 
+                msg += f" of shape {image.shape}"
                 logging.info(msg)
 
             except:
@@ -135,11 +145,12 @@ def detect_FITS(model):
             out_name = os.path.join(out_dir, f"CR_{os.path.basename(f)}")
             hdul.writeto(out_name, overwrite=True)
 
-            toc = time.perf_counter()
-            msg = f"Detection of a {image.shape} image took {round(toc-tic, 2)}s."
             msg1 = f"Result saved as {os.path.basename(out_name)}"
-            logging.info(msg)
             logging.info(msg1)
+
+    time_end = time.perf_counter()
+    msg = f"Total detection time for {len(all_fits)} images: {round(time_end-time_start, 2)}s"
+    logging.info(msg)
 
     msg = f"\nDone. The CR probability map is appended to a new FITS copy and saved in {PREDICT_DIR}"
     logging.info(msg)

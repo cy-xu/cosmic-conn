@@ -17,6 +17,7 @@ import torch.optim as optim
 # model import
 from cosmic_conn.dl_framework.utils_ml import (
     clean_large,
+    clean_large_mp,
     modulus_boundary_crop,
     subtract_sky,
     median_weighted_bce,
@@ -208,7 +209,7 @@ class Cosmic_CoNN(nn.Module):
         mask[: pdt.shape[0], : pdt.shape[1]] = pdt
         return mask
 
-    def detect_image_stamps(self, image, crop=1024):
+    def detect_image_stamps(self, image, crop=1024, num_process=1):
         # if not enough memory, detect in smaller stamps
         mask = None
 
@@ -219,9 +220,19 @@ class Cosmic_CoNN(nn.Module):
             try:
                 torch.cuda.empty_cache()
 
-                mask = clean_large(
-                    image, self.network, patch=stamp, overlap=0
-                )
+                if num_process > 1:
+                    mask = clean_large_mp(
+                        image, self.network, patch=stamp, overlap=0, num_process=num_process
+                    )
+                else:
+                    mask = clean_large(
+                        image, self.network, patch=stamp, overlap=0
+                    )
+
+                # development: make sure mask is identical to mask_mp
+                # if mask_mp is not None:
+                #     assert torch.allclose(mask, mask_mp), "results are not identical."
+
             except:
                 logging.warning(f"...{stamp}x{stamp} stamp won't fit into memory.")
 
@@ -251,7 +262,7 @@ class Cosmic_CoNN(nn.Module):
                 mask = self.detect_full_image(image)
             else:
                 # slice image into smaller stamps
-                mask = self.detect_image_stamps(image, self.opt.crop)
+                mask = self.detect_image_stamps(image, self.opt.crop, self.opt.num_process)
 
         if ret_numpy:
             return tensor2np(mask)
