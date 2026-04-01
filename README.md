@@ -6,12 +6,13 @@
 
 ### [[New] Demo video for interactive CR mask visualization and editing](https://www.youtube.com/watch?v=bdqmwcQeKyc&ab_channel=CYXu)
 
-## About 
+## About
+
 ![Cosmic-CoNN overview](https://cosmic-conn.readthedocs.io/en/latest/_images/Cosmic-CoNN_overview.png)
 
 Cosmic-CoNN is an end-to-end solution to help tackle the cosmic ray (CR) detection problem in CCD-captured astronomical images. It includes a deep-learning framework, high-performance CR detection models, a new dataset, and a suite of tools to use to the models, shown in the figure above:
 
-1. [LCO CR dataset](https://zenodo.org/record/5034763), a large, diverse cosmic ray dataset that consists of over 4,500 scientific images from [Las Cumbres Observatory](https://lco.global/) (LCO) global telescope network's 23 instruments. CRs are labeled accurately and consistently across many diverse observations from various instruments. To the best of our knowledge, this is the largest dataset of its kind. 
+1. [LCO CR dataset](https://zenodo.org/record/5034763), a large, diverse cosmic ray dataset that consists of over 4,500 scientific images from [Las Cumbres Observatory](https://lco.global/) (LCO) global telescope network's 23 instruments. CRs are labeled accurately and consistently across many diverse observations from various instruments. To the best of our knowledge, this is the largest dataset of its kind.
 
 2. A PyTorch deep-learning framework that trains generic, robust CR detection models for ground- and space-based imaging data, as well as spectroscopic observations.
 
@@ -23,23 +24,26 @@ Visual inspection of Cosmic-CoNNCR detection results. Detecting CRs in a Gemini 
 ![Detection demo on LCO NRES data](https://cosmic-conn.readthedocs.io/en/latest/_images/fig11_nres_result_0034_1.png)
 The Cosmic-CoNN ``NRES`` model detects CRs over the spectrum robustly on a LCO NRES spectroscopic image. The horizontal bands in the left image are the spectroscopic orders, which are left out of the CR mask.
 
-
 ## Installation
 
-*We recently added optional dependencies install for pip.*
-
-We recommend installing Cosmic-CoNN in a new virtual environment, see the step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html). To get a ~10x speed-up with GPU acceleration, see [Install for a CUDA-enabled GPU](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html).
+We recommend using [uv](https://github.com/astral-sh/uv). See the step-by-step [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html) for more detail.
+ PyTorch must be requested explicitly via an extra — `cpu` and `cuda` are mutually exclusive:
 
 ```bash
-  # basic install for CR detection or library integration
-  $ pip install cosmic-conn
+  # CPU-only PyTorch (no GPU required)
+  $ uv pip install "cosmic-conn[cpu]"
 
-  # include Flask to use the interactive tool
-  $ pip install "cosmic-conn[webapp]"
+  # CUDA-enabled PyTorch (requires NVIDIA GPU with CUDA 12.4)
+  $ uv pip install "cosmic-conn[cuda]"
+
+  # include Flask to use the interactive web tool
+  $ uv pip install "cosmic-conn[cpu,webapp]"
 
   # install all dependencies for development
-  $ pip install "cosmic-conn[develop]"
+  $ uv pip install "cosmic-conn[cpu,develop]"
 ```
+
+If you are using plain `pip`, install PyTorch separately from the [PyTorch website](https://pytorch.org/get-started/locally/) before installing `cosmic-conn`. See the [installation guide](https://cosmic-conn.readthedocs.io/en/latest/source/installation.html) for more detail.
 
 ## Command-line interface
 
