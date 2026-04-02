@@ -48,7 +48,7 @@ def init_model(model, opt=None):
 
     # logging
     msg = f"Initializing Cosmic-CoNN CR detection {opt.model} model...\n"
-    logging.info(msg)
+    logging.debug(msg)
 
     for k, v in opt.__dict__.items():
         logging.debug(f"{k}: {v}")
@@ -78,7 +78,7 @@ def init_model(model, opt=None):
     cr_model.eval()
 
     msg = f"{opt.model} model initialized.\n"
-    logging.info(msg)
+    logging.debug(msg)
 
     return cr_model
 
@@ -141,7 +141,7 @@ def detect_FITS(model):
             logging.info(msg)
             logging.info(msg1)
 
-    msg = f"\nDone. The CR probability map is appended to a new FITS copy and saved in {PREDICT_DIR}"
+    msg = f"Done. The CR probability map is appended to a new FITS copy and saved in {PREDICT_DIR}"
     logging.info(msg)
 
     if os.path.exists(TEMP_DIR):

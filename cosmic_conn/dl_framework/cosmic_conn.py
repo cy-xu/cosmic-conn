@@ -43,12 +43,12 @@ class Cosmic_CoNN(nn.Module):
 
         if torch.cuda.is_available():
             self.device = torch.device("cuda")
-            logging.info("...GPU found, yeah!")
+            logging.debug("...GPU found, yeah!")
             
         else:
             self.device = torch.device("cpu")
-            logging.info("...GPU or CUDA not detected, using CPU (slower). ")
-            logging.info("...training on CPU is not recommended.")
+            logging.debug("...GPU or CUDA not detected, using CPU (slower). ")
+            logging.debug("...training on CPU is not recommended.")
 
         self.model_dir = os.path.join(opt.expr_dir, "models")
         self.valid_dir = os.path.join(opt.expr_dir, "validation")

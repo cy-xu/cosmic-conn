@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cosmic_conn"
+version = "0.5.0"
+description = "Cosmic-CoNN: A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit"
+readme = "README.md"
+license = { text = "GNU General Public License v3" }
+authors = [
+    { name = "Chengyuan Xu, Curtis McCully, Boning Dong, D. Andrew Howell, and Pradeep Sen", email = "cxu@ucsb.edu" },
+]
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.7",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Environment :: GPU :: NVIDIA CUDA",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Topic :: Scientific/Engineering :: Astronomy",
+]
+dependencies = [
+    "numpy>=2.0",
+    "astropy>=7.0",
+    "scikit-image",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+cpu = ["torch>=1.6.0"]
+cuda = ["torch>=1.6.0"]
+webapp = [
+    "requests",
+    "Flask>=1.1.0",
+    "Flask-APScheduler>=1.12.0",
+]
+develop = [
+    "sep",
+    "reproject",
+    "psutil",
+    "requests",
+    "pretty-errors",
+    "tensorboard>=2.4.0",
+    "scikit-learn>=0.24.0",
+    "Flask>=1.1.0",
+    "Flask-APScheduler>=1.12.0",
+]
+
+[project.scripts]
+cosmic-conn = "cosmic_conn.inference_cr:CLI_entry_point"
+cosmic_conn = "cosmic_conn.inference_cr:CLI_entry_point"
+
+[project.urls]
+Homepage = "https://github.com/cy-xu/cosmic-conn"
+
+[tool.uv]
+environments = [
+    "sys_platform == 'darwin'",
+    "sys_platform == 'linux'",
+]
+conflicts = [
+    [{ extra = "cpu" }, { extra = "cuda" }],
+]
+
+[tool.setuptools.packages.find]
+include = [
+    "cosmic_conn",
+    "cosmic_conn.*",
+]
+
+[tool.pytest.ini_options]
+collect_ignore = ["setup.py"]

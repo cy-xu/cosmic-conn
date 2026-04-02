@@ -42,8 +42,8 @@ def calculate_dice_score(prediction, reference, threshold=0.5, dilate_1px=False)
     identical if `im1` and `im2` are switched.
     """
     eps = 1
-    pdt = np.asarray(prediction > threshold).astype(np.bool)
-    ref = np.asarray(reference > threshold).astype(np.bool)
+    pdt = np.asarray(prediction > threshold).astype(bool)
+    ref = np.asarray(reference > threshold).astype(bool)
 
     if dilate_1px:
         pdt = dilation(pdt, square(3))
