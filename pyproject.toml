@@ -58,7 +58,6 @@ cosmic_conn = "cosmic_conn.inference_cr:CLI_entry_point"
 [project.urls]
 Homepage = "https://github.com/cy-xu/cosmic-conn"
 
-# uv-specific: resolve lockfile for both macOS and Linux
 [tool.uv]
 environments = [
     "sys_platform == 'darwin'",
@@ -67,23 +66,6 @@ environments = [
 conflicts = [
     [{ extra = "cpu" }, { extra = "cuda" }],
 ]
-
-# uv-specific: route torch to the appropriate PyTorch index depending on the extra
-[tool.uv.sources]
-torch = [
-    { index = "pytorch-cpu", extra = "cpu" },
-    { index = "pytorch-cuda", extra = "cuda" },
-]
-
-[[tool.uv.index]]
-name = "pytorch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-explicit = true
-
-[[tool.uv.index]]
-name = "pytorch-cuda"
-url = "https://download.pytorch.org/whl/cu124"
-explicit = true
 
 [tool.setuptools.packages.find]
 include = [
