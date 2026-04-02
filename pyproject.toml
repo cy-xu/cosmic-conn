@@ -11,7 +11,7 @@ license = { text = "GNU General Public License v3" }
 authors = [
     { name = "Chengyuan Xu, Curtis McCully, Boning Dong, D. Andrew Howell, and Pradeep Sen", email = "cxu@ucsb.edu" },
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.11"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Programming Language :: Python :: 3.7",
@@ -25,8 +25,8 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Astronomy",
 ]
 dependencies = [
-    "numpy",
-    "astropy>=3.0",
+    "numpy>=2.0",
+    "astropy>=7.0",
     "scikit-image",
     "tqdm",
 ]
