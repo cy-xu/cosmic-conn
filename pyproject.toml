@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cosmic_conn"
-version = "0.6.0"
+version = "0.6.1"
 description = "Cosmic-CoNN: A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit"
 readme = "README.md"
 license = { text = "GNU General Public License v3" }
