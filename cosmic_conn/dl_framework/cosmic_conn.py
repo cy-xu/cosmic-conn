@@ -60,7 +60,6 @@ class Cosmic_CoNN(nn.Module):
         self.build_models(opt)
 
     def build_models(self, opt):
-        torch.set_default_tensor_type(torch.FloatTensor)
         torch.set_default_dtype(torch.float32)
 
         # group norm parameters
