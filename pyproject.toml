@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cosmic_conn"
-version = "0.5.0"
+version = "0.5.1"
 description = "Cosmic-CoNN: A Cosmic Ray Detection Deep Learning Framework, Dataset, and Toolkit"
 readme = "README.md"
 license = { text = "GNU General Public License v3" }
@@ -14,7 +14,12 @@ authors = [
 requires-python = ">=3.11"
 classifiers = [
     "Development Status :: 3 - Alpha",
-    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Environment :: Console",
     "Environment :: Web Environment",
     "Environment :: GPU :: NVIDIA CUDA",
@@ -67,10 +72,34 @@ conflicts = [
     [{ extra = "cpu" }, { extra = "cuda" }],
 ]
 
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cuda", extra = "cuda" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
 [tool.setuptools.packages.find]
 include = [
     "cosmic_conn",
     "cosmic_conn.*",
+]
+
+[tool.setuptools.package-data]
+cosmic_conn = [
+    "trained_models/*.pth",
+    "web_app/static/**/*",
+    "web_app/templates/**/*.html",
+    "scripts/**/*",
 ]
 
 [tool.pytest.ini_options]

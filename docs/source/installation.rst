@@ -13,16 +13,16 @@ uv installation documentation: https://docs.astral.sh/uv/getting-started/install
 
 Create and activate a new virtual environment with ``uv``::
 
-    $ uv venv cosmic-conn --python 3.10
+    $ uv venv cosmic-conn --python 3.11
     $ source cosmic-conn/bin/activate
 
 Alternatively, you can use Anaconda to manage virtual environments:
 
 Anaconda installation documentation: https://docs.anaconda.com/anaconda/install/
 
-Create a new virtual environment in Python version 3.10 named "cosmic-conn"::
+Create a new virtual environment in Python version 3.11 or later named "cosmic-conn"::
 
-    $ conda create --name cosmic-conn python=3.10 -y
+    $ conda create --name cosmic-conn python=3.11 -y
 
 Activate this environment::
 
